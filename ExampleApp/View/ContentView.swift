@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Query var characterModel: [CharacterModel]
     @Environment(\.modelContext) var modelContext
-
+    @Environment(ViewModel.self) private var viewModel
 
     var body: some View {
         NavigationStack {
@@ -20,16 +20,14 @@ struct ContentView: View {
                     VStack(alignment: .leading) {
                         Text(character.name)
                             .font(.headline)
-
+                        
                         Text(character.creationDate.formatted(date: .long, time: .shortened))
                         
                         ForEach(character.traitsList){ trait in
                             Text(trait.name)
-                            
-                        }
+                         }
                     }
-                        
-                    }
+                    
                 }
             }
             .toolbar {
@@ -37,6 +35,7 @@ struct ContentView: View {
             }
             .navigationTitle("Characters")
         }
+    }
     
     func addSamples() {
         let romeo = CharacterModel(name: "Romeo", characterDescription: "A very strong hero", role: "hero")

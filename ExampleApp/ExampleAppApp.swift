@@ -10,10 +10,21 @@ import SwiftData
 
 @main
 struct ExampleAppApp: App {
+    @State private var viewModel = ViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .modelContainer(for: CharacterModel.self)
-        }
+            NavigationSplitView {
+                SidebarView(selectedFilter: $viewModel.selectedFilter)
+            } content: {
+                ContentView()
+            } detail: {
+                DetailView()
+            }
+            .modelContainer(for: CharacterModel.self)
+            .environment(viewModel)
+
+
+          }
     }
 }

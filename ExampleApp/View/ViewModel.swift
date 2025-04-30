@@ -1,0 +1,22 @@
+//
+//  ViewModel.swift
+//  ExampleApp
+//
+//  Created by Renato Ferrara on 30/04/25.
+//
+import SwiftUI
+
+@Observable
+class ViewModel {
+    let all = Filter(id: UUID(), name: "All Filters", icon: "tray")
+    let recent = Filter(id: UUID(), name: "Recent characters", icon: "clock", miniModificationDate: Date.now.addingTimeInterval((86400 * -7)))
+    
+    var selectedFilter: Filter?
+    var smartFilters: [Filter]?
+    
+    init() {
+        selectedFilter = all
+         smartFilters = [all, recent]
+         
+    }
+}

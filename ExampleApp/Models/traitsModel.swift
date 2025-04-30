@@ -10,7 +10,8 @@ import Foundation
 
 @Model
 class Traits {
-    var name: String
+    var id = UUID()
+    var name: String = "Trait name"
     var characterRelated: CharacterModel?
     
     init( name: String, owner: CharacterModel? = nil) {
