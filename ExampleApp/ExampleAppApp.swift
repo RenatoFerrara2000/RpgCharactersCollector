@@ -19,7 +19,7 @@ struct ExampleAppApp: App {
             } content: {
                 ContentView()
             } detail: {
-                DetailView()
+                DetailView(selectedFilter: $viewModel.selectedFilter )
             }
             .modelContainer(for: CharacterModel.self)
             .environment(viewModel)

@@ -10,7 +10,7 @@ import SwiftData
 import Foundation
 
 @Model
-class CharacterModel {
+class CharacterModel: Comparable {
     //  due to cloudKit: All properties must either have default values or be marked as optional, alongside their initializer.
 
     var name: String = "Character Name"
@@ -19,8 +19,19 @@ class CharacterModel {
     private(set) var creationDate = Date.now // can't be a let due to swift 6, SwiftData needs to be able to write to the object when loading it from storage.
     var modificationDate: Date?
     // SwiftData automatically knows and connects traits to  the character
-    var traitsList = [Traits]()
+    var traitsList = [Traits]().sorted()
 
+    static func < (lhs: CharacterModel, rhs: CharacterModel) -> Bool {
+        let left = lhs.name.localizedLowercase
+        let right = rhs.name.localizedLowercase
+        
+        if left == right {
+            return lhs.name < rhs.name
+        } else {
+            return left < right
+        }
+
+    }
     
     init( name: String, characterDescription: String, role: String) {
          self.name = name
@@ -28,6 +39,9 @@ class CharacterModel {
         self.role = role
       }
  
+    static var example: CharacterModel {
+        return CharacterModel(name: "Example Character", characterDescription: "Example of a descrpition", role: "Example Role")
+    }
 }
 
 

@@ -12,7 +12,8 @@ struct Filter: Identifiable, Hashable {
     var name: String
     var icon: String
     var miniModificationDate = Date.distantPast
-    var tag: Traits?
+    
+    var trait: Traits?
     
     
     func hash(into hasher: inout Hasher){

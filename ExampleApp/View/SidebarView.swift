@@ -16,9 +16,11 @@ struct SidebarView: View {
     @Query var traits: [Traits]
 
     var traitsFilter: [Filter] {
-        traits.map { trait in
-            Filter(id: trait.id, name: trait.name, icon: "tag", tag: trait)
-            
+        let grouped = Dictionary(grouping: traits, by: { $0.name })
+        let sortedGrouped = grouped.sorted { $0.key < $1.key }
+
+        return sortedGrouped.map { (name, traits) in
+            Filter(id: traits.first!.id, name: name, icon: "tag", trait: traits.first!)
         }
     }
 
@@ -34,9 +36,12 @@ struct SidebarView: View {
                  }
              }
                Section("Traits"){
+                   let grouped = Dictionary(grouping: traits, by: { $0.name })
+
                    ForEach(traitsFilter){ filter in
                        NavigationLink(value: filter){
                            Label(filter.name, systemImage: filter.icon)
+                               .badge(grouped[filter.name]?.count ?? 0)
                        }}
                }
          }
@@ -55,5 +60,4 @@ struct SidebarView: View {
 
 #Preview {
     SidebarView(selectedFilter: .constant(nil))
-            .environment(ViewModel())
-}
+ }
