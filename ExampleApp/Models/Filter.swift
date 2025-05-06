@@ -11,7 +11,7 @@ struct Filter: Identifiable, Hashable {
     var id: UUID
     var name: String
     var icon: String
-    var miniModificationDate = Date.distantPast
+    var minModificationDate = Date.distantPast
     
     var trait: Traits?
     

@@ -9,7 +9,7 @@ import SwiftUI
 @Observable
 class ViewModel {
     let all = Filter(id: UUID(), name: "All Filters", icon: "tray")
-    let recent = Filter(id: UUID(), name: "Recent characters", icon: "clock", miniModificationDate: Date.now.addingTimeInterval((86400 * -7)))
+    let recent = Filter(id: UUID(), name: "Recent characters", icon: "clock", minModificationDate: Date.now.addingTimeInterval((86400 * -7)))
     
     var selectedFilter: Filter?
     var smartFilters: [Filter]?
@@ -19,4 +19,6 @@ class ViewModel {
          smartFilters = [all, recent]
          
     }
+    
+    
 }
