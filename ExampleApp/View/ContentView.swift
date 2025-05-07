@@ -21,8 +21,13 @@ struct ContentView: View {
         // Check if filter has a specific trait
         if let trait = filter.trait {
             result = characterArray.filter { character in
-                character.traitsList.contains { $0.name == trait.name}
-            }
+                if let traits = character.traitsList {
+                    // Then check if any trait in the list matches the name
+                    return traits.contains { $0.name == trait.name }
+                } else {
+                    // If traitsList is nil, this character doesn't have the trait
+                    return false
+                }            }
         }
         
         // Check if filter has a specific date
@@ -41,7 +46,7 @@ struct ContentView: View {
             List {
                 ForEach(charactersFiltered) { character in
                     CharacterRow(character: character)
-                }
+                }.onDelete(perform: deleteCharacter)
             }
             .toolbar {
                 Button("Samples", action: addSamples)
@@ -65,8 +70,17 @@ struct ContentView: View {
         modelContext.insert(romeoOld)
         
         romeo3.traitsList = [Traits(name: "Eroe Medievale", owner: romeo3)]
+        
+        romeo2.traitsList = [Traits(name: "Good Hero", owner: romeo2), Traits(name: "Secret Evil Hero", owner: romeo2) ]
+
     }
     
+    func deleteCharacter(_ offsets: IndexSet) {
+        for offset in offsets {
+            modelContext.delete(characterArray[offset])
+        }
+
+    }
     
     func deleteAll() {
         do {

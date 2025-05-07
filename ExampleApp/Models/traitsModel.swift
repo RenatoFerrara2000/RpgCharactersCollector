@@ -22,6 +22,9 @@ class Traits: Comparable {
 
     }
     
+     // When a trait is deleted, just remove its reference from the character's trait list 
+    @Relationship(deleteRule: .nullify, inverse: \CharacterModel.traitsList)
+
   
     var id = UUID()
     var name: String = "Trait name"

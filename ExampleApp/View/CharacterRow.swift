@@ -25,7 +25,7 @@ struct CharacterRow: View {
                         .font(.headline)
                         .lineLimit(1)
                 
-                    ForEach(character.traitsList){ trait in
+                    ForEach(character.traitsList ?? []){ trait in
                         Text(trait.name)
                     }
                     .lineLimit(1)
@@ -41,6 +41,7 @@ struct CharacterRow: View {
             }
         }
     }
+    
 }
 
 #Preview {

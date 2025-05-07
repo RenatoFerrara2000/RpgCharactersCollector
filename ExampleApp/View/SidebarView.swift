@@ -12,11 +12,10 @@ struct SidebarView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedFilter: Filter?
-    @Query var characters: [CharacterModel]  // Scoped fetch
-
-    
+    @Query var characters: [CharacterModel] 
     @Query var traits: [Traits]
     
+    // build a list of Filter out of traits
     var traitsFilter: [Filter] {
         let grouped = Dictionary(grouping: traits, by: { $0.name })
         let sortedGrouped = grouped.sorted { $0.key < $1.key }
@@ -43,8 +42,7 @@ struct SidebarView: View {
                 ForEach(traitsFilter){ filter in
                     NavigationLink(value: filter){
                         Label(filter.name, systemImage: filter.icon)
-                            .badge(grouped[filter.name]?.count ?? 0)
-                        
+                            .badge(countCharactersWithTrait(traitName: filter.name))
                     }
                 }.onDelete(perform: deleteTraits)
             }
@@ -60,28 +58,36 @@ struct SidebarView: View {
         }
     }
     
-    func deleteTraits(_ offsets: IndexSet) {
+     func countCharactersWithTrait(traitName: String) -> Int {
+        var count = 0
+        
+        for character in characters {
+             if let traits = character.traitsList {
+                 if traits.contains(where: { $0.name == traitName }) {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
+    
+     func deleteTraits(_ offsets: IndexSet) {
         for offset in offsets {
             let traitName = traitsFilter[offset].name
 
-            // 1. Delete trait references from characters ((this is the only reason we have the query for characters, there is probably a better way withouth having to fetch characters.
+            // 1. Safely delete trait references from characters
             for character in characters {
-                if character.traitsList.contains(where: { $0.name == traitName }) {
-                    character.traitsList.removeAll(where: { $0.name == traitName })
+                // Only attempt to modify traitsList if it exists
+                if var traits = character.traitsList {
+                    traits.removeAll(where: { $0.name == traitName })
+                    character.traitsList = traits
                 }
             }
-
+            
             // 2. Delete all Trait instances with matching name
             for trait in traits where trait.name == traitName {
                 modelContext.delete(trait)
             }
-        }
-
-        // 3. Save changes
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to delete traits: \(error)")
         }
     }
 }

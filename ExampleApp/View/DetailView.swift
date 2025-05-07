@@ -15,8 +15,14 @@ struct DetailView: View {
     @Query var characterModels: [CharacterModel]
 
     var filteredCharacters: [CharacterModel] {
-        if let filterTrait = selectedFilter?.trait  {
-            return characterModels.filter { $0.traitsList.contains(filterTrait) }
+        if let filterTrait = selectedFilter?.trait {
+            return characterModels.filter { character in
+                // Only check for traits if traitsList exists
+                guard let traits = character.traitsList else {
+                    return false
+                }
+                return traits.contains(filterTrait)
+            }
         } else {
             return characterModels
         }
