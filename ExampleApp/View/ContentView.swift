@@ -12,6 +12,8 @@ struct ContentView: View {
     @Query var characterArray: [CharacterModel]
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
+    @Binding var selectedCharacter: CharacterModel?
+
     
     var charactersFiltered: [CharacterModel] {
         let filter = viewModel.selectedFilter ?? viewModel.all
@@ -43,7 +45,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            List(selection: $selectedCharacter) {
                 ForEach(charactersFiltered) { character in
                     CharacterRow(character: character)
                 }.onDelete(perform: deleteCharacter)

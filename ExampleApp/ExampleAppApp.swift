@@ -17,9 +17,9 @@ struct ExampleAppApp: App {
             NavigationSplitView {
                 SidebarView(selectedFilter: $viewModel.selectedFilter)
             } content: {
-                ContentView()
+                ContentView(selectedCharacter: $viewModel.selectedCharacter)
             } detail: {
-                DetailView(selectedFilter: $viewModel.selectedFilter )
+                DetailView( )
             }
             .modelContainer(for: CharacterModel.self)
             .environment(viewModel)

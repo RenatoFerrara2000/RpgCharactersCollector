@@ -12,6 +12,10 @@ class ViewModel {
     let recent = Filter(id: UUID(), name: "Recent characters", icon: "clock", minModificationDate: Date.now.addingTimeInterval((86400 * -7)))
     
     var selectedFilter: Filter?
+    var selectedCharacter: CharacterModel?
+    
+ 
+
     var smartFilters: [Filter]?
     
     init() {

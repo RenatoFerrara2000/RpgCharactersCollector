@@ -9,33 +9,25 @@ import SwiftUI
 import SwiftData
 
 struct DetailView: View {
-    @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
-    @Binding  var selectedFilter: Filter?
-    @Query var characterModels: [CharacterModel]
-
-    var filteredCharacters: [CharacterModel] {
-        if let filterTrait = selectedFilter?.trait {
-            return characterModels.filter { character in
-                // Only check for traits if traitsList exists
-                guard let traits = character.traitsList else {
-                    return false
-                }
-                return traits.contains(filterTrait)
-            }
-        } else {
-            return characterModels
-        }
-    }
     
     var body: some View {
-        ForEach(filteredCharacters) { characterModel in
-            VStack {
-                Text(characterModel.name)
-                Text(characterModel.characterDescription)
+        VStack {
+            
+            if let  selectedCharacter = viewModel.selectedCharacter {
+                CharacterView(character: selectedCharacter)
+            } else {
+                NoCharacterView()
             }
         }
+            .navigationTitle("Detail View")
+            .navigationBarTitleDisplayMode(.inline)
+
     }
+ }
+    
+#Preview {
+    DetailView()
 }
 
  
