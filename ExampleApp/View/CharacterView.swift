@@ -11,7 +11,13 @@ struct CharacterView: View {
     
     @State  var character: CharacterModel
     @Environment(\.modelContext) var modelContext
+    @Environment(ViewModel.self) private var viewModel
     @Query var allTraits: [Traits]
+    
+    var labelTraits: String {
+        let traits = character.traitsList ?? []
+        return traits.isEmpty ? "No Traits" : traits.map { $0.name }.joined(separator: ", ")
+    }
     
     var body: some View {
         Form{
@@ -69,8 +75,9 @@ struct CharacterView: View {
                             }
                         }
                     } label: {
-                        Label("Traits", systemImage: "tag")
+                        Text(labelTraits)
                             .multilineTextAlignment(.leading)
+                            .lineLimit(1)
                     }
                 }
             }
@@ -91,4 +98,5 @@ struct CharacterView: View {
 
 #Preview {
     CharacterView(character: .example)
+        .environment(ViewModel())
 }

@@ -12,9 +12,7 @@ struct Filter: Identifiable, Hashable {
     var name: String
     var icon: String
     var minModificationDate = Date.distantPast
-    
     var trait: Traits?
-    
     
     func hash(into hasher: inout Hasher){
         hasher.combine(id)

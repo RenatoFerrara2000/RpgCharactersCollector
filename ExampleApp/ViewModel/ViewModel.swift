@@ -18,6 +18,7 @@ class ViewModel {
 
     var smartFilters: [Filter]?
     
+    
     init() {
         selectedFilter = all
          smartFilters = [all, recent]
