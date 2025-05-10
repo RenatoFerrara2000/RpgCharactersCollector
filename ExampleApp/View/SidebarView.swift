@@ -92,8 +92,9 @@ struct SidebarView: View {
     }
 }
 
-/*
+
 #Preview {
     SidebarView(selectedFilter: .constant(nil))
+        .environment(ViewModel())
  }
-*/
+

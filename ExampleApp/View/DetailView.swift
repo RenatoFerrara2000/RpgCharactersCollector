@@ -27,7 +27,13 @@ struct DetailView: View {
  }
     
 #Preview {
-    DetailView()
+    let viewModel = ViewModel()
+    
+    // Comment this out to see the view when no characters are selected
+    viewModel.selectedCharacter = CharacterModel.example
+    
+    return DetailView()
+        .environment(viewModel)
 }
 
  
