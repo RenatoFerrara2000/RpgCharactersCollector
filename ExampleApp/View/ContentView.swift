@@ -10,38 +10,75 @@ import SwiftData
 
 struct ContentView: View {
     @Query var characterArray: [CharacterModel]
+    @Query var allTraits: [Traits]
+    
+
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedCharacter: CharacterModel?
+    
+    @State private var searchText = ""
+    @State var filterTokens = [Traits]()
+    @State private var currentTokens = [Traits]()
+    @State private var suggestions: [Traits] = [] // New state for suggestions
+
+
+    var suggestedTraits: [Traits] {
+            if searchText.starts(with: "#") {
+               return allTraits
+           } else {
+               return []
+           }
+       }
 
     
     var charactersFiltered: [CharacterModel] {
         let filter = viewModel.selectedFilter ?? viewModel.all
-        
         var result = characterArray
-        
-        // Check if filter has a specific trait
-        if let trait = filter.trait {
-            result = characterArray.filter { character in
-                if let traits = character.traitsList {
-                    // Then check if any trait in the list matches the name
-                    return traits.contains { $0.name == trait.name }
-                } else {
-                    // If traitsList is nil, this character doesn't have the trait
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespaces)
+
+        result = characterArray.filter { character in
+            
+            // Check if filter has a specific trait
+            if let trait = filter.trait {
+                    if let traits = character.traitsList {
+                        // Then check if any trait in the list matches the name
+                        return traits.contains { $0.name == trait.name }
+                    } else {
+                        // If traitsList is nil, this character doesn't have the trait
+                        return false
+                    }
+            }
+            
+            if searchText.isEmpty == false {
+                // If we have search text, make sure this item matches.
+                if character.name.localizedCaseInsensitiveContains(trimmedSearchText) == false {
                     return false
-                }            }
+                }
+            }
+            
+            if currentTokens.isEmpty == false {
+                // If we have search tokens, loop through them all to make sure one of them matches our movie.
+                for token in currentTokens {
+                    for trait in character.traitsList ?? [] {
+                        if token.name.localizedCaseInsensitiveContains(trait.name) {
+                            return true
+                        }
+                    }
+                }
+                return false
+            }
+            return true
         }
-        
         // Check if filter has a specific date
         if filter.minModificationDate != Date.distantPast {
             result = result.filter { character in
                 (character.modificationDate ?? character.creationDate) > filter.minModificationDate
                 
             }
-            
         }
-        return result.sorted()
-    }
+            return result.sorted()
+        }
     
     var body: some View {
         NavigationStack {
@@ -50,30 +87,47 @@ struct ContentView: View {
                     CharacterRow(character: character)
                 }.onDelete(perform: deleteCharacter)
             }
+            .searchable(text: $searchText, tokens: $currentTokens, suggestedTokens: $suggestions, prompt: Text("Type to filter, or use # for tags")) { token in
+                Text( token.name)
+                      }
+            .onChange(of: searchText) { oldValue, newValue in
+                if newValue.starts(with: "#") {
+                    suggestions = allTraits // Update the suggestions state
+                } else {
+                    suggestions = [] // Clear suggestions if '#' is not present
+                }
+            }
+            
             .toolbar {
                 Button("Samples", action: addSamples)
                 Button("Del", action: deleteAll)
             }
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
+           
+        }.onAppear(){
+            for trait in allTraits {
+                print(trait.name)
+            }
         }
     }
+        
     
     func addSamples() {
         let romeo = CharacterModel(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
-        let romeo2 = CharacterModel(name: "Romeo2", characterDescription: "A very strong hero2", role: "hero2")
-        let romeo3 = CharacterModel(name: "Romeo3", characterDescription: "A very strong hero3", role: "hero3")
-        let romeoOld = CharacterModel(name: "RomeoOLD", characterDescription: "A very OLD hero", role: "OLD hero3")
+        let juliett = CharacterModel(name: "Juliett", characterDescription: "A very strong hero2", role: "hero2")
+        let frederick = CharacterModel(name: "Frederick", characterDescription: "A very strong hero3", role: "hero3")
+        let hinu = CharacterModel(name: "Hinu", characterDescription: "A very OLD hero", role: "OLD hero3")
         
-        romeoOld.modificationDate = Date.now.addingTimeInterval(-7 * 60 * 60 * 24 * 365 )
+        hinu.modificationDate = Date.now.addingTimeInterval(-7 * 60 * 60 * 24 * 365 )
         
         modelContext.insert(romeo)
-        modelContext.insert(romeo2)
-        modelContext.insert(romeo3)
-        modelContext.insert(romeoOld)
+        modelContext.insert(juliett)
+        modelContext.insert(frederick)
+        modelContext.insert(hinu)
         
-        romeo3.traitsList = [Traits(name: "Eroe Medievale", owner: romeo3)]
+        frederick.traitsList = [Traits(name: "Eroe Medievale", owner: frederick)]
         
-        romeo2.traitsList = [Traits(name: "Good Hero", owner: romeo2), Traits(name: "Secret Evil Hero", owner: romeo2) ]
+        juliett.traitsList = [Traits(name: "Good Hero", owner: juliett), Traits(name: "Secret Evil Hero", owner: juliett) ]
 
     }
     

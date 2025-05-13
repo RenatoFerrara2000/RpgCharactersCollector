@@ -23,8 +23,6 @@ struct ExampleAppApp: App {
             }
             .modelContainer(for: CharacterModel.self)
             .environment(viewModel)
-
-
           }
     }
 }
