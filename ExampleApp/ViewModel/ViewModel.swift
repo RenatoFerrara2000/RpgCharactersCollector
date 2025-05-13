@@ -14,7 +14,15 @@ class ViewModel {
     var selectedFilter: Filter?
     var selectedCharacter: CharacterModel?
     
+     var sortType = SortType.dateCreated
+
+   
  
+ 
+     var sortNewestFirst = true
+     var filterEnabled = false
+
+
 
     var smartFilters: [Filter]?
     
@@ -26,4 +34,11 @@ class ViewModel {
     }
     
     
+}
+
+ 
+enum SortType: String {
+    case dateCreated = "creationDate"
+    case dateModified = "modificationDate"
+    case name = "name"
 }

@@ -16,7 +16,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedCharacter: CharacterModel?
-    
+ 
     @State private var searchText = ""
     @State var filterTokens = [Traits]()
     @State private var currentTokens = [Traits]()
@@ -77,10 +77,31 @@ struct ContentView: View {
                 
             }
         }
-            return result.sorted()
-        }
+        return result.sorted { char1, char2 in
+                        if viewModel.filterEnabled {
+                            if viewModel.sortType == .dateCreated {
+                                if viewModel.sortNewestFirst {
+                                    return char1.creationDate > char2.creationDate
+                                } else {
+                                    return char1.creationDate < char2.creationDate
+                                }
+                            } else {
+                                let date1 = char1.modificationDate ?? char1.creationDate
+                                let date2 = char2.modificationDate ?? char2.creationDate
+                                if viewModel.sortNewestFirst {
+                                    return date1 > date2
+                                } else {
+                                    return date1 < date2
+                                }
+                            }
+                        } else {
+                            return char1.name < char2.name
+                        }
+                    }
+                }
     
     var body: some View {
+        @Bindable var viewModel = viewModel
         NavigationStack {
             List(selection: $selectedCharacter) {
                 ForEach(charactersFiltered) { character in
@@ -97,10 +118,38 @@ struct ContentView: View {
                     suggestions = [] // Clear suggestions if '#' is not present
                 }
             }
-            
             .toolbar {
                 Button("Samples", action: addSamples)
                 Button("Del", action: deleteAll)
+                
+                Menu {
+                    Button(viewModel.filterEnabled ? "Turn Filter Off" : "Turn Filter On") {
+                        viewModel.filterEnabled.toggle()
+                    }
+
+                    Divider()
+
+                    Menu("Sort By") {
+                        
+                           Picker("Sort By", selection: $viewModel.sortType) {
+                         Text("Date Created").tag(SortType.dateCreated)
+                         Text("Date Modified").tag(SortType.dateModified)
+                            }
+
+                         Divider()
+                        
+                         
+                         Picker("Sort Order", selection: $viewModel.sortNewestFirst) {
+                         Text("Newest to Oldest").tag(true)
+                         Text("Oldest to Newest").tag(false)
+                         }
+
+                    }
+
+ 
+                } label: {
+                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    .symbolVariant(viewModel.filterEnabled ? .fill : .none)                }
             }
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
            
