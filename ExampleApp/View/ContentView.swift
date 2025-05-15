@@ -21,6 +21,7 @@ struct ContentView: View {
     @State var filterTokens = [Traits]()
     @State private var currentTokens = [Traits]()
     @State private var suggestions: [Traits] = [] // New state for suggestions
+ 
 
 
     var suggestedTraits: [Traits] {
@@ -119,9 +120,20 @@ struct ContentView: View {
                 }
             }
             .toolbar {
-                Button("Samples", action: addSamples)
-                Button("Del", action: deleteAll)
-                
+                Button{
+                    var newCharacter = CharacterModel(name: "New Character", characterDescription: "", role: "")
+                    modelContext.insert(newCharacter)
+                    
+                    if let  trait = viewModel.selectedFilter?.trait  {
+                        newCharacter.traitsList = [Traits(name: trait.name, owner: newCharacter)]
+                    }
+                        viewModel.selectedCharacter = newCharacter
+ 
+                   } label: {
+                       NavigationLink(destination: DetailView()) {
+                             Label("New Character", systemImage: "square.and.pencil")
+                         }
+                 }
                 Menu {
                     Button(viewModel.filterEnabled ? "Turn Filter Off" : "Turn Filter On") {
                         viewModel.filterEnabled.toggle()

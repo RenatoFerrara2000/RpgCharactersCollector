@@ -12,8 +12,14 @@ struct SidebarView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedFilter: Filter?
-    @Query var characters: [CharacterModel] 
+    @Query var characters: [CharacterModel]
     @Query var traits: [Traits]
+    
+    
+    @State private var   tagToRename: Traits?
+    @State private var   newTagName: String = ""
+    @State private var   isRenamingTag: Bool = false
+    
     
     // build a list of Filter out of traits
     var traitsFilter: [Filter] {
@@ -32,38 +38,58 @@ struct SidebarView: View {
                     NavigationLink(value: filter) {
                         Label(filter.name, systemImage: filter.icon)
                     }
-                    
                 }
             }
             
             Section("Traits"){
                 let grouped = Dictionary(grouping: traits, by: { $0.name })
-                
                 ForEach(traitsFilter){ filter in
                     NavigationLink(value: filter){
                         Label(filter.name, systemImage: filter.icon)
                             .badge(countCharactersWithTrait(traitName: filter.name))
+                            .contextMenu {
+                                Button {
+                                    guard let traitSelected = traits.first(where: { $0.name == filter.name }) else { return }
+                                    renameTrait(traitSelected)
+                                } label: {
+                                    Label("Rename", systemImage: "pencil")
+                                }
+                            }
                     }
                 }.onDelete(perform: deleteTraits)
             }
+        }
+        .toolbar{
+            // will not be in production
+#if DEBUG
+            Button {
+                modelContext.insert(Traits(name: "New Trait"))
+                modelContext.insert(Traits(name: "New Trait2"))
+                modelContext.insert(Traits(name: "New Trait3"))
+            } label: {
+                Label("Add samples)", systemImage: "key")
             }
-            .toolbar{
-                Button {
-                    modelContext.insert(Traits(name: "New Trait"))
-                    modelContext.insert(Traits(name: "New Trait2"))
-                    modelContext.insert(Traits(name: "New Trait3"))
-                } label: {
-                    Label("Add samples)", systemImage: "key")
-                }
+#endif
+            
+            Button {
+                modelContext.insert(Traits(name: "New Trait"))
+            } label: {
+                Label("Add samples)", systemImage: "plus")
+            }
+        }
+        .alert("Rename Character", isPresented: $isRenamingTag){
+            Button("OK", action: completeRename)
+            Button("Cancel", role: .cancel) {}
+            TextField("New Name", text: $newTagName)
         }
     }
     
-     func countCharactersWithTrait(traitName: String) -> Int {
+    func countCharactersWithTrait(traitName: String) -> Int {
         var count = 0
         
         for character in characters {
-             if let traits = character.traitsList {
-                 if traits.contains(where: { $0.name == traitName }) {
+            if let traits = character.traitsList {
+                if traits.contains(where: { $0.name == traitName }) {
                     count += 1
                 }
             }
@@ -71,10 +97,10 @@ struct SidebarView: View {
         return count
     }
     
-     func deleteTraits(_ offsets: IndexSet) {
+    func deleteTraits(_ offsets: IndexSet) {
         for offset in offsets {
             let traitName = traitsFilter[offset].name
-
+            
             // 1. Safely delete trait references from characters
             for character in characters {
                 // Only attempt to modify traitsList if it exists
@@ -90,11 +116,27 @@ struct SidebarView: View {
             }
         }
     }
+    
+    func renameTrait(_ trait: Traits) {
+        tagToRename = trait
+        newTagName = trait.name
+        isRenamingTag = true
+        
+    }
+    
+    func completeRename() {
+        guard let oldName = tagToRename?.name else { return }
+        
+        // 1. Update all Traits with the same name
+        for trait in traits where trait.name == oldName {
+            trait.name = newTagName
+        }
+    }
 }
 
 
 #Preview {
     SidebarView(selectedFilter: .constant(nil))
         .environment(ViewModel())
- }
+}
 

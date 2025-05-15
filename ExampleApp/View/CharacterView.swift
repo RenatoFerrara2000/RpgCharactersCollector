@@ -6,7 +6,7 @@
 //
 import SwiftUI
 import SwiftData
-
+ 
 struct CharacterView: View {
     
     @State  var character: CharacterModel
@@ -16,7 +16,14 @@ struct CharacterView: View {
     
     var labelTraits: String {
         let traits = character.traitsList ?? []
-        return traits.isEmpty ? "No Traits" : traits.map { $0.name }.joined(separator: ", ")
+        if traits.isEmpty {
+            return "No Traits"
+        } else {
+            // Create a Set from trait names to eliminate duplicates
+            let uniqueTraits = Set(traits.compactMap { $0.name })
+            // Convert back to array and join with commas
+            return Array(uniqueTraits).sorted().joined(separator: ", ")
+        }
     }
     
     var body: some View {
