@@ -19,6 +19,8 @@ struct SidebarView: View {
     @State private var   tagToRename: Traits?
     @State private var   newTagName: String = ""
     @State private var   isRenamingTag: Bool = false
+    @State private var showingAwards = false
+
     
     
     // build a list of Filter out of traits
@@ -70,6 +72,11 @@ struct SidebarView: View {
                 Label("Add samples)", systemImage: "key")
             }
 #endif
+            Button {
+                showingAwards.toggle()
+            } label: {
+                Label("Show awards", systemImage: "rosette")
+            }
             
             Button {
                 modelContext.insert(Traits(name: "New Trait"))
@@ -82,6 +89,8 @@ struct SidebarView: View {
             Button("Cancel", role: .cancel) {}
             TextField("New Name", text: $newTagName)
         }
+        .sheet(isPresented: $showingAwards, content: AwardsView.init)
+
     }
     
     func countCharactersWithTrait(traitName: String) -> Int {

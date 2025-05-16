@@ -31,7 +31,7 @@ struct Test: View {
 
     // The list of tokens we want to show to the user right now. Activates token selection only when searchText starts with #.
     var suggestedTokens: [Token] {
-        if searchText.starts(with: "4") {
+        if searchText.starts(with: "#") {
             return allTokens
         } else {
             return []
