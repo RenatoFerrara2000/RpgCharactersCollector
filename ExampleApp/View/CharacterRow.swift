@@ -31,7 +31,9 @@ struct CharacterRow: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text(character.creationDate.formatted(date: .numeric, time: .omitted))
+                    
+                    Text(character.creationDate.formatted(date: .abbreviated, time: .omitted))
+                        .accessibilityLabel(character.creationDate.formatted(date: .abbreviated, time: .omitted))
                         .font(.subheadline)
                 }
             }

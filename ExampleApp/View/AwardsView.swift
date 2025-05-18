@@ -42,7 +42,10 @@ struct AwardsView: View {
                                 .frame(width: 100, height: 100)
                                  .foregroundColor(hasEarned(award: award) ? Color(award.color) : .secondary.opacity(0.5))
 
-                        }
+                        }.accessibilityLabel(
+                            hasEarned(award: award) ? "Unlocked: \(award.name)" : "Locked"
+                        )
+                        .accessibilityHint(award.description)
                     }
                 }
             }

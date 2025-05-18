@@ -63,6 +63,10 @@ struct SidebarView: View {
                                     Label("Rename", systemImage: "pencil")
                                 }
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel(filter.name)
+                            .accessibilityHint("^[\(countCharactersWithTrait(traitName: filter.name)) character](inflect: true)")
+ 
                     }
                 }.onDelete(perform: deleteTraits)
             }
