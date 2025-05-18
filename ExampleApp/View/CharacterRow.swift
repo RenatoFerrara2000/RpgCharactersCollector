@@ -15,8 +15,6 @@ struct CharacterRow: View {
         
         NavigationLink(value: character) {
             HStack{
-                
-                
                 Image(systemName: "figure.fencing")
                     .imageScale(.large)
                 
@@ -29,8 +27,6 @@ struct CharacterRow: View {
                         Text(trait.name)
                     }
                     .lineLimit(1)
-                    
-                    
                 }
                 Spacer()
                 

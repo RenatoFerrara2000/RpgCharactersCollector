@@ -16,15 +16,18 @@ class Character: Comparable {
     var name: String = "Character Name"
     var characterDescription: String = "Character Description"
     var role: String = "Character role"
-    private(set) var creationDate = Date.now // can't be a let due to swift 6, SwiftData needs to be able to write to the object when loading it from storage.
-    var modificationDate: Date?
+    
+    // can't be a let due to swift 6, SwiftData needs to be able to write to the object when loading it from storage.
+    private(set) var creationDate = Date.now
+    
     // SwiftData automatically knows and connects traits to  the character. MUST be optional because of relationship
+    var modificationDate: Date?
  
     //  When this character is deleted, remove its trait owner
     @Relationship(deleteRule: .nullify, inverse: \Traits.characterRelated)
     var traitsList: [Traits]?
 
-
+    // Func for Comparable
     static func < (lhs: Character, rhs: Character) -> Bool {
         let left = lhs.name.localizedLowercase
         let right = rhs.name.localizedLowercase

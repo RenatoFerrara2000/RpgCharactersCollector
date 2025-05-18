@@ -50,6 +50,12 @@ struct SidebarView: View {
                         Label(filter.name, systemImage: filter.icon)
                             .badge(countCharactersWithTrait(traitName: filter.name))
                             .contextMenu {
+                                Button(role: .destructive) {
+                                    delete(filter)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                                
                                 Button {
                                     guard let traitSelected = traits.first(where: { $0.name == filter.name }) else { return }
                                     renameTrait(traitSelected)
@@ -60,8 +66,9 @@ struct SidebarView: View {
                     }
                 }.onDelete(perform: deleteTraits)
             }
+
         }
-        .toolbar{
+         .toolbar{
             // will not be in production
 #if DEBUG
             Button {
@@ -84,6 +91,7 @@ struct SidebarView: View {
                 Label("Add samples)", systemImage: "plus")
             }
         }
+         .navigationTitle("Filters")
         .alert("Rename Character", isPresented: $isRenamingTag){
             Button("OK", action: completeRename)
             Button("Cancel", role: .cancel) {}
@@ -141,6 +149,11 @@ struct SidebarView: View {
             trait.name = newTagName
         }
     }
+    
+    func delete(_ filter: Filter) {
+        guard let trait = filter.trait else { return }
+        modelContext.delete( trait)
+     }
 }
 
 

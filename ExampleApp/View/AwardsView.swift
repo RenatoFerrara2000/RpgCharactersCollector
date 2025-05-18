@@ -24,6 +24,8 @@ struct AwardsView: View {
     var columns: [GridItem] {
         [GridItem(.adaptive(minimum: 100, maximum: 100))]
     }
+    
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -40,7 +42,8 @@ struct AwardsView: View {
                                 .frame(width: 100, height: 100)
                                  .foregroundColor(hasEarned(award: award) ? Color(award.color) : .secondary.opacity(0.5))
 
-                        }                    }
+                        }
+                    }
                 }
             }
             .navigationTitle("Awards")

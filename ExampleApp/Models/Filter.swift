@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Filter for the characters, can rely on modification date or traits
 struct Filter: Identifiable, Hashable {
     var id: UUID
     var name: String

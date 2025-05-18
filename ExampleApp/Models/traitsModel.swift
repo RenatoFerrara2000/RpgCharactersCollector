@@ -10,6 +10,8 @@ import Foundation
 
 @Model
 class Traits: Comparable {
+    
+    // Func for Comparable
     static func < (lhs: Traits, rhs: Traits) -> Bool {
         let left = lhs.name.localizedLowercase
         let right = rhs.name.localizedLowercase
