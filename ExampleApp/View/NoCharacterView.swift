@@ -19,7 +19,7 @@ struct NoCharacterView: View {
          
         }
         Button("New Character") {
-            modelContext.insert(CharacterModel(name: "New Character", characterDescription: "", role: ""))
+            modelContext.insert(Character(name: "New Character", characterDescription: "", role: ""))
         }
 
     }

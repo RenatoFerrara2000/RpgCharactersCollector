@@ -21,7 +21,7 @@ struct ExampleAppApp: App {
             } detail: {
                 DetailView( )
             }
-            .modelContainer(for: CharacterModel.self)
+            .modelContainer(for: Character.self)
             .environment(viewModel)
           }
     }

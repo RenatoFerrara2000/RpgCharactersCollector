@@ -9,13 +9,13 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query var characterArray: [CharacterModel]
+    @Query var characterArray: [Character]
     @Query var allTraits: [Traits]
     
 
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
-    @Binding var selectedCharacter: CharacterModel?
+    @Binding var selectedCharacter: Character?
  
     @State private var searchText = ""
     @State var filterTokens = [Traits]()
@@ -33,7 +33,7 @@ struct ContentView: View {
        }
 
     
-    var charactersFiltered: [CharacterModel] {
+    var charactersFiltered: [Character] {
         let filter = viewModel.selectedFilter ?? viewModel.all
         var result = characterArray
         let trimmedSearchText = searchText.trimmingCharacters(in: .whitespaces)
@@ -121,7 +121,7 @@ struct ContentView: View {
             }
             .toolbar {
                 Button{
-                    var newCharacter = CharacterModel(name: "New Character", characterDescription: "", role: "")
+                    var newCharacter = Character(name: "New Character", characterDescription: "", role: "")
                     modelContext.insert(newCharacter)
                     
                     if let  trait = viewModel.selectedFilter?.trait  {
@@ -174,10 +174,10 @@ struct ContentView: View {
         
     
     func addSamples() {
-        let romeo = CharacterModel(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
-        let juliett = CharacterModel(name: "Juliett", characterDescription: "A very strong hero2", role: "hero2")
-        let frederick = CharacterModel(name: "Frederick", characterDescription: "A very strong hero3", role: "hero3")
-        let hinu = CharacterModel(name: "Hinu", characterDescription: "A very OLD hero", role: "OLD hero3")
+        let romeo = Character(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
+        let juliett = Character(name: "Juliett", characterDescription: "A very strong hero2", role: "hero2")
+        let frederick = Character(name: "Frederick", characterDescription: "A very strong hero3", role: "hero3")
+        let hinu = Character(name: "Hinu", characterDescription: "A very OLD hero", role: "OLD hero3")
         
         hinu.modificationDate = Date.now.addingTimeInterval(-7 * 60 * 60 * 24 * 365 )
         
@@ -201,7 +201,7 @@ struct ContentView: View {
     
     func deleteAll() {
         do {
-            try modelContext.delete(model: CharacterModel.self)
+            try modelContext.delete(model: Character.self)
         } catch {
             print("Failed to delete students.")
         }
@@ -211,10 +211,10 @@ struct ContentView: View {
 
 #Preview {
          let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try! ModelContainer(for: CharacterModel.self, Traits.self, configurations: config)
+        let container = try! ModelContainer(for: Character.self, Traits.self, configurations: config)
         
         // Create a sample character with traits
-        let romeo = CharacterModel(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
+        let romeo = Character(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
         
         // Create some sample traits
         let brave = Traits(name: "Brave")

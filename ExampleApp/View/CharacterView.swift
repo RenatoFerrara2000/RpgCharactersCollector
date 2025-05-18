@@ -9,7 +9,7 @@ import SwiftData
  
 struct CharacterView: View {
     
-    @State  var character: CharacterModel
+    @State  var character: Character
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Query var allTraits: [Traits]

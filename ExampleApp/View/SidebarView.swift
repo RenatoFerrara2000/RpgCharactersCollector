@@ -12,7 +12,7 @@ struct SidebarView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedFilter: Filter?
-    @Query var characters: [CharacterModel]
+    @Query var characters: [Character]
     @Query var traits: [Traits]
     
     

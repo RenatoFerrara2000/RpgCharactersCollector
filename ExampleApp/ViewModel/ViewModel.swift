@@ -5,14 +5,15 @@
 //  Created by Renato Ferrara on 30/04/25.
 //
 import SwiftUI
-
+import SwiftData
+ 
 @Observable
 class ViewModel {
     let all = Filter(id: UUID(), name: "All Filters", icon: "tray")
     let recent = Filter(id: UUID(), name: "Recent characters", icon: "clock", minModificationDate: Date.now.addingTimeInterval((86400 * -7)))
     
     var selectedFilter: Filter?
-    var selectedCharacter: CharacterModel?
+    var selectedCharacter: Character?
     
      var sortType = SortType.dateCreated
 

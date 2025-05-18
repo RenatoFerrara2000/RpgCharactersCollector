@@ -3,7 +3,7 @@
         "name": "First Steps",
         "description": "Add your first Character.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 1,
         "image": "figure.walk"
     },
@@ -11,7 +11,7 @@
         "name": "A Great Start",
         "description": "Add 10 Characters.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 10,
         "image": "hand.thumbsup.fill"
     },
@@ -19,7 +19,7 @@
         "name": "Moving On Up",
         "description": "Add 20 Characters.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 20,
         "image": "tray.and.arrow.up.fill"
     },
@@ -27,7 +27,7 @@
         "name": "Gathering Speed",
         "description": "Add 50 Characters.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 50,
         "image": "speedometer"
     },
@@ -35,7 +35,7 @@
         "name": "Making Waves",
         "description": "Add 100 Characters.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 100,
         "image": "dot.radiowaves.left.and.right"
     },
@@ -43,7 +43,7 @@
         "name": "High Performer",
         "description": "Add 250 Characters.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 250,
         "image": "square.stack.3d.up.fill"
     },
@@ -59,7 +59,7 @@
         "name": "Champion Performer",
         "description": "Add 1000 Characters.",
         "color": "Light Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 1000,
         "image": "crown.fill"
     },

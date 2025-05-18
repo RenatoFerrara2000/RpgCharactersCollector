@@ -10,7 +10,7 @@ import SwiftUI
 struct CharacterRow: View {
     @Environment(\.modelContext) var modelContext
     
-    var character: CharacterModel
+    var character: Character
     var body: some View {
         
         NavigationLink(value: character) {

@@ -10,7 +10,7 @@ import SwiftData
 import Foundation
 
 @Model
-class CharacterModel: Comparable {
+class Character: Comparable {
     //  due to cloudKit: All properties must either have default values or be marked as optional, alongside their initializer.
 
     var name: String = "Character Name"
@@ -25,7 +25,7 @@ class CharacterModel: Comparable {
     var traitsList: [Traits]?
 
 
-    static func < (lhs: CharacterModel, rhs: CharacterModel) -> Bool {
+    static func < (lhs: Character, rhs: Character) -> Bool {
         let left = lhs.name.localizedLowercase
         let right = rhs.name.localizedLowercase
         
@@ -43,8 +43,8 @@ class CharacterModel: Comparable {
         self.role = role
       }
  
-    static var example: CharacterModel {
-        return CharacterModel(name: "Example Character", characterDescription: "Example of a descrpition", role: "Example Role")
+    static var example: Character {
+        return Character(name: "Example Character", characterDescription: "Example of a descrpition", role: "Example Role")
     }
 }
 
