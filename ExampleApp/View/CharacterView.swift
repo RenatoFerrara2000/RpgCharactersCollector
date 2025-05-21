@@ -17,7 +17,7 @@ struct CharacterView: View {
     var labelTraits: String {
         let traits = character.traitsList ?? []
         if traits.isEmpty {
-            return "No Traits"
+            return NSLocalizedString("No Traits", comment: "")
         } else {
             // Create a Set from trait names to eliminate duplicates
             let uniqueTraits = Set(traits.compactMap { $0.name })

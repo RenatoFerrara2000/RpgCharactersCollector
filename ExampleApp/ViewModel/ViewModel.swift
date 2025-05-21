@@ -9,8 +9,14 @@ import SwiftData
  
 @Observable
 class ViewModel {
-    let all = Filter(id: UUID(), name: "All Filters", icon: "tray")
-    let recent = Filter(id: UUID(), name: "Recent characters", icon: "clock", minModificationDate: Date.now.addingTimeInterval((86400 * -7)))
+    let all = Filter(id: UUID(),
+                     name: NSLocalizedString("All Filters", comment: "Filter name for showing all items"),
+                     icon: "tray")
+    
+    let recent = Filter(id: UUID(),
+                        name: NSLocalizedString("Recent Characters", comment: "Filter name for recently modified characters"),
+                        icon: "clock",
+                        minModificationDate: Date.now.addingTimeInterval((86400 * -7)))
     
     var selectedFilter: Filter?
     var selectedCharacter: Character?

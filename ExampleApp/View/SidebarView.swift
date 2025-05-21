@@ -80,7 +80,7 @@ struct SidebarView: View {
                 modelContext.insert(Traits(name: "New Trait2"))
                 modelContext.insert(Traits(name: "New Trait3"))
             } label: {
-                Label("Add samples)", systemImage: "key")
+                Label("Add samples", systemImage: "key")
             }
 #endif
             Button {
@@ -92,7 +92,7 @@ struct SidebarView: View {
             Button {
                 modelContext.insert(Traits(name: "New Trait"))
             } label: {
-                Label("Add samples)", systemImage: "plus")
+                Label("Add samples", systemImage: "plus")
             }
         }
          .navigationTitle("Filters")

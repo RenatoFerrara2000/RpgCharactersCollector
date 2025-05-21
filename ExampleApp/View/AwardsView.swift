@@ -15,9 +15,10 @@ struct AwardsView: View {
     
     var awardTitle: String {
         if hasEarned(award: selectedAward) {
-            return "Unlocked: \(selectedAward.name)"
+            let format = NSLocalizedString("Unlocked: %@", comment: "Award unlocked title")
+            return String(format: format, selectedAward.name)
         } else {
-            return "Locked"
+            return NSLocalizedString("Locked", comment: "Award locked title")
         }
     }
 

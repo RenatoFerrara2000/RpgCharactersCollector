@@ -109,7 +109,7 @@ struct ContentView: View {
                     CharacterRow(character: character)
                 }.onDelete(perform: deleteCharacter)
             }
-            .searchable(text: $searchText, tokens: $currentTokens, suggestedTokens: $suggestions, prompt: Text("Type to filter, or use # for tags")) { token in
+            .searchable(text: $searchText, tokens: $currentTokens, suggestedTokens: $suggestions, prompt: Text("Type to filter, or use # for traits")) { token in
                 Text( token.name)
                       }
             .onChange(of: searchText) { oldValue, newValue in
