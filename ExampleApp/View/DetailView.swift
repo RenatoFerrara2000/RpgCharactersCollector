@@ -8,33 +8,25 @@
 import SwiftUI
 import SwiftData
 
-struct DetailView: View {
-    @Environment(ViewModel.self) private var viewModel
+ struct DetailView: View {
+    var selectedCharacter: Character?
     
     var body: some View {
         VStack {
-            
-            if let  selectedCharacter = viewModel.selectedCharacter {
-                CharacterView(character: selectedCharacter)
+            if let character = selectedCharacter {
+                CharacterView(character: character)
             } else {
                 NoCharacterView()
             }
         }
-            .navigationTitle("Detail View")
-            .navigationBarTitleDisplayMode(.inline)
-        
-
+        .navigationTitle("Detail View")
+        .navigationBarTitleDisplayMode(.inline)
     }
- }
+}
+
     
 #Preview {
-    let viewModel = ViewModel()
-    
-    // Comment this out to see the view when no characters are selected
-    viewModel.selectedCharacter = Character.example
-    
-    return DetailView()
-        .environment(viewModel)
-}
+    DetailView(selectedCharacter: Character.example)
+ }
 
  
