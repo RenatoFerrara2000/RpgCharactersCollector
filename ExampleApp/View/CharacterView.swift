@@ -6,7 +6,7 @@
 //
 import SwiftUI
 import SwiftData
- 
+
 struct CharacterView: View {
     
     @State  var character: Character
@@ -97,6 +97,9 @@ struct CharacterView: View {
                     
                     TextField("Description", text: $character.characterDescription, prompt: Text("Enter Character Description"))
                 }
+            }
+            Section{
+                CharacterConversation(character: character )
             }
         }
     }

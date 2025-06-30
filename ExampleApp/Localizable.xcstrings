@@ -102,6 +102,16 @@
         }
       }
     },
+    "Chat" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        }
+      }
+    },
     "Chr - %@" : {
       "localizations" : {
         "it" : {
@@ -345,6 +355,16 @@
         }
       }
     },
+    "Send" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia"
+          }
+        }
+      }
+    },
     "Show awards" : {
       "localizations" : {
         "it" : {
@@ -432,6 +452,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sbloccato: %@"
+          }
+        }
+      }
+    },
+    "Write Something" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scrivi qualcosa"
           }
         }
       }
