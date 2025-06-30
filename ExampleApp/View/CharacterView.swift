@@ -11,7 +11,6 @@ struct CharacterView: View {
     
     @State  var character: Character
     @Environment(\.modelContext) var modelContext
-    @Environment(ViewModel.self) private var viewModel
     @Query var allTraits: [Traits]
     
     var labelTraits: String {
