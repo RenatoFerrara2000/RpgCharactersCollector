@@ -166,9 +166,6 @@ struct ContentView: View {
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
            
         }.onAppear(){
-            for trait in allTraits {
-                print(trait.name)
-            }
         }
     }
         
@@ -203,7 +200,7 @@ struct ContentView: View {
         do {
             try modelContext.delete(model: Character.self)
         } catch {
-            print("Failed to delete students.")
+            print("Failed to delete characters.")
         }
     }
 }
