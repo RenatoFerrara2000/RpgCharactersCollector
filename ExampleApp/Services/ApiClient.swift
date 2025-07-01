@@ -24,55 +24,66 @@ struct ApiClient {
         request.setValue("\(apiKey)", forHTTPHeaderField: "X-API-Key")
         
         request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
-
+        
         var messages: [[String: Any]] = []
-              
-              // Add conversation history (excluding system messages)
-              for message in conversationHistory {
-                  let role = message.isAI ? "assistant" : "user"
-                  messages.append([
-                      "role": role,
-                      "content": message.text
-                  ])
-              }
         
-        var systemMessage = instructions
-
+        // Add conversation history (excluding system messages)
+        for message in conversationHistory {
+            let role = message.isAI ? "assistant" : "user"
+            messages.append([
+                "role": role,
+                "content": message.text
+            ])
+        }
         
+         let systemMessage = instructions
+ 
         messages.append([
-                 "role": "user",
-                 "content": prompt
-             ])
-
+            "role": "user",
+            "content": prompt
+        ])
         
-        let requestBody: [String: Any] = [
-                   "model": "claude-3-5-haiku-20241022",
-                   "max_tokens": 1024,
-                   "messages": messages,
-                   "system": systemMessage
-               ]
-        
-        request.httpBody =  try JSONSerialization.data(withJSONObject: requestBody)
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        if let httpResponse = response as? HTTPURLResponse,
-                 httpResponse.statusCode != 200 {
-                  throw APIError.httpError(httpResponse.statusCode)
-              }
-         
-        let claudeResponse = try JSONDecoder().decode(ClaudeResponse.self, from: data)
-        
-        
-        let responseText = claudeResponse.content.first?.text ?? ""
-
-        return (claudeResponse.id, responseText)
-              }
+         let requestBody: [String: Any] = [
+            "model": "claude-3-5-haiku-20241022",
+            "max_tokens": 1024,
+            "messages": messages,
+            "system": systemMessage
+        ]
+        do {
+            
+            request.httpBody =  try JSONSerialization.data(withJSONObject: requestBody)
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            if let httpResponse = response as? HTTPURLResponse,
+               httpResponse.statusCode != 200 {
+                throw HTTPError(statusCode: httpResponse.statusCode)
+            }
+            
+            let claudeResponse = try JSONDecoder().decode(ClaudeResponse.self, from: data)
+            
+            let responseText = claudeResponse.content.first?.text ?? ""
+            
+            return (claudeResponse.id, responseText)
+        }
+    }
 }
 
-enum APIError: Error {
-    case httpError(Int)
-    case decodingError
-    case networkError
+struct HTTPError: Error, LocalizedError {
+    let statusCode: Int
+    
+    var errorDescription: String? {
+        switch statusCode {
+        case 401:
+            return "Authentication failed - check your API key"
+        case 400:
+            return "Bad request - invalid parameters"
+        case 429:
+            return "Rate limit exceeded"
+        case 500...599:
+            return "Server error (\(statusCode))"
+        default:
+            return "HTTP error \(statusCode)"
+        }
+    }
 }
-
