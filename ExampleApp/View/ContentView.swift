@@ -114,9 +114,9 @@ struct ContentView: View {
                       }
             .onChange(of: searchText) { oldValue, newValue in
                 if newValue.starts(with: "#") {
-                    suggestions = allTraits // Update the suggestions state
+                    suggestions = allTraits
                 } else {
-                    suggestions = [] // Clear suggestions if '#' is not present
+                    suggestions = [] 
                 }
             }
             .toolbar {

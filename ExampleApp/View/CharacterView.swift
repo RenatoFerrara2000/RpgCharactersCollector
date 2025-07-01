@@ -61,7 +61,7 @@ struct CharacterView: View {
                         // Traits the character doesn't have yet
                         let characterTraits = character.traitsList ?? []
                         let unselectedTraits = allTraits.filter { trait in
-                            !characterTraits.contains { $0.id == trait.id }
+                            !characterTraits.contains { $0.name == trait.name }
                         }
                         
                         if !unselectedTraits.isEmpty {
