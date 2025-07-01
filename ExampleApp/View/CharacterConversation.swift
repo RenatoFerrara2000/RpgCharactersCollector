@@ -20,7 +20,7 @@ struct CharacterConversation: View {
                             List(messages) { message in
                                 HStack {
                                     if message.isAI {
-                                        Image(systemName: "brain")
+                                        Image(systemName: "figure.fencing")
                                             .foregroundColor(.blue)
                                     } else {
                                         Image(systemName: "person")

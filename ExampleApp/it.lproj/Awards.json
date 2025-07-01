@@ -2,7 +2,7 @@
     {
         "name": "Primi Passi",
         "description": "Aggiungi il tuo primo personaggio.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 1,
         "image": "figure.walk"
@@ -10,7 +10,7 @@
     {
         "name": "Un Ottimo Inizio",
         "description": "Aggiungi 10 personaggi.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 10,
         "image": "hand.thumbsup.fill"
@@ -18,7 +18,7 @@
     {
         "name": "Si Sale di Livello",
         "description": "Aggiungi 20 personaggi.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 20,
         "image": "tray.and.arrow.up.fill"
@@ -26,7 +26,7 @@
     {
         "name": "Sempre Più Veloce",
         "description": "Aggiungi 50 personaggi.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 50,
         "image": "speedometer"
@@ -34,7 +34,7 @@
     {
         "name": "Inizia a esserci una folla",
         "description": "Aggiungi 100 personaggi",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 100,
         "image": "dot.radiowaves.left.and.right"
@@ -42,7 +42,7 @@
     {
         "name": "Alte Prestazioni",
         "description": "Aggiungi 250 personaggi.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 250,
         "image": "square.stack.3d.up.fill"
@@ -50,7 +50,7 @@
     {
         "name": "Una gilda di eroi",
         "description": "Aggiungi 500 personaggi.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "Characters",
         "value": 500,
         "image": "star.circle.fill"
@@ -58,7 +58,7 @@
     {
         "name": "Campione delle ere",
         "description": "Aggiungi 1000 personaggi.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 1000,
         "image": "crown.fill"
@@ -66,7 +66,7 @@
     {
         "name": "Un Nuovo Tratto",
         "description": "Hai creato il tuo primo tratto.",
-        "color": "Gold",
+        "color": "MyGold",
         "criterion": "traits",
         "value": 1,
         "image": "tag.fill"
@@ -74,23 +74,23 @@
     {
         "name": "Tratti in Lotta",
         "description": "Hai creato 10 tratti.",
-        "color": "Gold",
+        "color": "MyGold",
         "criterion": "traits",
         "value": 10,
         "image": "tag.circle.fill"
     },
     {
         "name": "Maestro dei Tratti",
-               "description": "Hai creato 50 tratti.",
-        "color": "Gold",
+        "description": "Hai creato 50 tratti.",
+        "color": "MyGold",
         "criterion": "traits",
         "value": 50,
         "image": "square.grid.3x1.folder.fill.badge.plus"
     },
     {
         "name": "Sostenitore",
-               "description": "Hai acquistato lo sblocco premium.",
-        "color": "Purple",
+        "description": "Hai acquistato lo sblocco premium.",
+        "color": "MyPurple",
         "criterion": "unlock",
         "value": 0,
         "image": "dollarsign.square.fill"

@@ -2,7 +2,7 @@
     {
         "name": "First Steps",
         "description": "Add your first Character.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 1,
         "image": "figure.walk"
@@ -10,7 +10,7 @@
     {
         "name": "A Great Start",
         "description": "Add 10 Characters.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 10,
         "image": "hand.thumbsup.fill"
@@ -18,7 +18,7 @@
     {
         "name": "Moving On Up",
         "description": "Add 20 Characters.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 20,
         "image": "tray.and.arrow.up.fill"
@@ -26,7 +26,7 @@
     {
         "name": "Gathering Speed",
         "description": "Add 50 Characters.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 50,
         "image": "speedometer"
@@ -34,7 +34,7 @@
     {
         "name": "Making Waves",
         "description": "Add 100 Characters.",
-        "color": "Light Blue",
+        "color": "MyLigh tBlue",
         "criterion": "character",
         "value": 100,
         "image": "dot.radiowaves.left.and.right"
@@ -42,7 +42,7 @@
     {
         "name": "High Performer",
         "description": "Add 250 Characters.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 250,
         "image": "square.stack.3d.up.fill"
@@ -50,7 +50,7 @@
     {
         "name": "Star Performer",
         "description": "Add 500 Characters.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "Characters",
         "value": 500,
         "image": "star.circle.fill"
@@ -58,7 +58,7 @@
     {
         "name": "Champion Performer",
         "description": "Add 1000 Characters.",
-        "color": "Light Blue",
+        "color": "MyLight Blue",
         "criterion": "character",
         "value": 1000,
         "image": "crown.fill"
@@ -66,7 +66,7 @@
     {
         "name": "A new trait",
         "description": "You created your first trait.",
-        "color": "Gold",
+        "color": "MyGold",
         "criterion": "traits",
         "value": 1,
         "image": "tag.fill"
@@ -74,7 +74,7 @@
     {
         "name": "traits wrestling",
         "description": "You've created 10 traits.",
-        "color": "Gold",
+        "color": "MyGold",
         "criterion": "traits",
         "value": 10,
         "image": "tag.circle.fill"
@@ -82,7 +82,7 @@
     {
         "name": "Traits Master ",
         "description": "You've created 50 traits.",
-        "color": "Gold",
+        "color": "MyGold",
         "criterion": "traits",
         "value": 50,
         "image": "square.grid.3x1.folder.fill.badge.plus"
@@ -90,7 +90,7 @@
     {
         "name": "Supporter",
         "description": "You bought the premium unlock.",
-        "color": "Purple",
+        "color": "MyPurple",
         "criterion": "unlock",
         "value": 0,
         "image": "dollarsign.square.fill"
