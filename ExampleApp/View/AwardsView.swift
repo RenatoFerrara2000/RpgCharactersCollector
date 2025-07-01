@@ -14,7 +14,7 @@ struct AwardsView: View {
     @State private var showingAwardDetails = false
     
     var awardTitle: String {
-        if hasEarned(award: selectedAward) {
+        if selectedAward.hasEarned( modelContext: modelContext){
             let format = NSLocalizedString("Unlocked: %@", comment: "Award unlocked title")
             return String(format: format, selectedAward.name)
         } else {
@@ -41,10 +41,10 @@ struct AwardsView: View {
                                 .scaledToFit()
                                 .padding()
                                 .frame(width: 100, height: 100)
-                                 .foregroundColor(hasEarned(award: award) ? Color(award.color) : .secondary.opacity(0.5))
+                                .foregroundColor(award.hasEarned( modelContext: modelContext) ? Color(award.color) : .secondary.opacity(0.5))
 
                         }.accessibilityLabel(
-                            hasEarned(award: award) ? "Unlocked: \(award.name)" : "Locked"
+                            award.hasEarned( modelContext: modelContext) ? "Unlocked: \(award.name)" : "Locked"
                         )
                         .accessibilityHint(award.description)
                     }
@@ -58,26 +58,6 @@ struct AwardsView: View {
         }
     }
     
-    func hasEarned(award: Award) -> Bool {
-        switch award.criterion {
-        case "character":
-            // returns true if they added a certain number of issues
-            let descriptor = FetchDescriptor<Character>()
-            let awardCount = (try? modelContext.fetchCount(descriptor)) ?? 0
-            return awardCount >= award.value
-
-        case "traits":
-            // return true if they created a certain number of tags
-            let descriptor = FetchDescriptor<Traits>()
-            let awardCount = (try? modelContext.fetchCount(descriptor)) ?? 0
-            return awardCount >= award.value
-
-        default:
-            // an unknown award criterion; this should never be allowed
-            // fatalError("Unknown award criterion: \(award.criterion)")
-            return false
-        }
-    }
 }
 
 #Preview {

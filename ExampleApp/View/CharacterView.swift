@@ -6,12 +6,11 @@
 //
 import SwiftUI
 import SwiftData
- 
+
 struct CharacterView: View {
     
     @State  var character: Character
     @Environment(\.modelContext) var modelContext
-    @Environment(ViewModel.self) private var viewModel
     @Query var allTraits: [Traits]
     
     var labelTraits: String {
@@ -62,7 +61,7 @@ struct CharacterView: View {
                         // Traits the character doesn't have yet
                         let characterTraits = character.traitsList ?? []
                         let unselectedTraits = allTraits.filter { trait in
-                            !characterTraits.contains { $0.id == trait.id }
+                            !characterTraits.contains { $0.name == trait.name }
                         }
                         
                         if !unselectedTraits.isEmpty {
@@ -97,6 +96,9 @@ struct CharacterView: View {
                     
                     TextField("Description", text: $character.characterDescription, prompt: Text("Enter Character Description"))
                 }
+            }
+            Section{
+                CharacterConversation(character: character )
             }
         }
     }

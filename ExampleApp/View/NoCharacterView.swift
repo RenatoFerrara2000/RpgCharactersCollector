@@ -9,8 +9,7 @@ import SwiftUI
 
 struct NoCharacterView: View {
     @Environment(\.modelContext) var modelContext
-    @Environment(ViewModel.self) private var viewModel
-    
+ 
     var body: some View {
         Text("No character selected")
             .font(.title)
