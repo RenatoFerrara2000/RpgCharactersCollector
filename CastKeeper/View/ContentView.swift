@@ -14,19 +14,10 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedCharacter: Character?
- 
+    
     @State private var searchText = ""
-    @State var filterTokens = [Traits]()
-    @State private var currentTokens = [Traits]()
+     @State private var currentTokens = [Traits]()
     @State private var suggestions: [Traits] = []
- 
-    var suggestedTraits: [Traits] {
-        if searchText.starts(with: "#") {
-           return allTraits
-       } else {
-           return []
-       }
-    }
     
     var charactersFiltered: [Character] {
         filterCharacters()
@@ -40,15 +31,8 @@ struct ContentView: View {
                     CharacterRow(character: character)
                 }.onDelete(perform: deleteCharacter)
             }
-            .searchable(text: $searchText, tokens: $currentTokens, suggestedTokens: $suggestions, prompt: Text("Type to filter, or use # for traits")) { token in
+            .searchable(text: $searchText, tokens: $currentTokens, suggestedTokens: $suggestions, prompt: Text("Type to filter")) { token in
                 Text( token.name)
-            }
-            .onChange(of: searchText) { oldValue, newValue in
-                if newValue.starts(with: "#") {
-                    suggestions = allTraits
-                } else {
-                    suggestions = []
-                }
             }
             .toolbar {
                 Button{
@@ -58,47 +42,49 @@ struct ContentView: View {
                     if let  trait = viewModel.selectedFilter?.trait  {
                         newCharacter.traitsList = [Traits(name: trait.name, owner: newCharacter)]
                     }
-                        viewModel.selectedCharacter = newCharacter
- 
-                   } label: {
-                       NavigationLink(destination: DetailView()) {
-                             Label("New Character", systemImage: "square.and.pencil")
-                         }
-                 }
+                    viewModel.selectedCharacter = newCharacter
+                    
+                } label: {
+                    NavigationLink(destination: DetailView()) {
+                        Label("New Character", systemImage: "square.and.pencil")
+                    }
+                }
                 Menu {
                     Button(viewModel.filterEnabled ? "Turn Filter Off" : "Turn Filter On") {
                         viewModel.filterEnabled.toggle()
                     }
-
+                    
                     Divider()
-
+                    
                     Menu("Sort By") {
                         
-                           Picker("Sort By", selection: $viewModel.sortType) {
-                         Text("Date Created").tag(SortType.dateCreated)
-                         Text("Date Modified").tag(SortType.dateModified)
-                            }
-
-                         Divider()
+                        Picker("Sort By", selection: $viewModel.sortType) {
+                            Text("Date Created").tag(SortType.dateCreated)
+                            Text("Date Modified").tag(SortType.dateModified)
+                        }
                         
-                         
-                         Picker("Sort Order", selection: $viewModel.sortNewestFirst) {
-                         Text("Newest to Oldest").tag(true)
-                         Text("Oldest to Newest").tag(false)
-                         }
-
+                        Divider()
+                        
+                        
+                        Picker("Sort Order", selection: $viewModel.sortNewestFirst) {
+                            Text("Newest to Oldest").tag(true)
+                            Text("Oldest to Newest").tag(false)
+                        }
+                        
                     }
-
- 
+                    
+                    
                 } label: {
                     Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
                     .symbolVariant(viewModel.filterEnabled ? .fill : .none)                }
             }
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
-           
-        }.onAppear(){
+            
         }
     }
+}
+
+extension ContentView {
     
     private func filterCharacters() -> [Character] {
         let filter = viewModel.selectedFilter ?? viewModel.all
@@ -167,26 +153,6 @@ struct ContentView: View {
                 return char1.name < char2.name
             }
         }
-    }
-        
-    
-    func addSamples() {
-        let romeo = Character(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
-        let juliett = Character(name: "Juliett", characterDescription: "A very strong hero2", role: "hero2")
-        let frederick = Character(name: "Frederick", characterDescription: "A very strong hero3", role: "hero3")
-        let hinu = Character(name: "Hinu", characterDescription: "A very OLD hero", role: "OLD hero3")
-        
-        hinu.modificationDate = Date.now.addingTimeInterval(-7 * 60 * 60 * 24 * 365 )
-        
-        modelContext.insert(romeo)
-        modelContext.insert(juliett)
-        modelContext.insert(frederick)
-        modelContext.insert(hinu)
-        
-        frederick.traitsList = [Traits(name: "Eroe Medievale", owner: frederick)]
-        
-        juliett.traitsList = [Traits(name: "Good Hero", owner: juliett), Traits(name: "Secret Evil Hero", owner: juliett) ]
-
     }
     
     func deleteCharacter(_ offsets: IndexSet) {

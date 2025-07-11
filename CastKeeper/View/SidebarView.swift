@@ -20,7 +20,7 @@ struct SidebarView: View {
     @State private var   newTagName: String = ""
     @State private var   isRenamingTag: Bool = false
     @State private var showingAwards = false
-
+    
     
     
     // build a list of Filter out of traits
@@ -66,13 +66,13 @@ struct SidebarView: View {
                             .accessibilityElement()
                             .accessibilityLabel(filter.name)
                             .accessibilityHint("^[\(countCharactersWithTrait(traitName: filter.name)) character](inflect: true)")
- 
+                        
                     }
                 }.onDelete(perform: deleteTraits)
             }
-
+            
         }
-         .toolbar{
+        .toolbar{
             // will not be in production
 #if DEBUG
             Button {
@@ -105,16 +105,19 @@ struct SidebarView: View {
                 Label("Add samples", systemImage: "plus")
             }
         }
-         .navigationTitle("Filters")
+        .navigationTitle("Filters")
         .alert("Rename Character", isPresented: $isRenamingTag){
             Button("OK", action: completeRename)
             Button("Cancel", role: .cancel) {}
             TextField("New Name", text: $newTagName)
         }
         .sheet(isPresented: $showingAwards, content: AwardsView.init)
-
+        
     }
     
+}
+
+extension SidebarView {
     func countCharactersWithTrait(traitName: String) -> Int {
         var count = 0
         

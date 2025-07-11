@@ -50,7 +50,7 @@ struct CharacterConversation: View {
 
 
 extension CharacterConversation {
-    // P
+    // Presentation Logic
     func sendChatMessage() {
         let prompt = messageText
         messageText = ""
