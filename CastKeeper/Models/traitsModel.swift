@@ -21,7 +21,6 @@ class Traits: Comparable {
         } else {
             return left < right
         }
-
     }
     
      // When a trait is deleted, just remove its reference from the character's trait list 

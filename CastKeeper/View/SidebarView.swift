@@ -90,7 +90,17 @@ struct SidebarView: View {
             }
             
             Button {
-                modelContext.insert(Traits(name: "New Trait"))
+                // Find the highest "New Trait" number
+                let highestNumber = traits.compactMap { trait -> Int? in
+                    if trait.name == "New Trait" { return 0 }
+                    if trait.name.hasPrefix("New Trait") {
+                        return Int(String(trait.name.dropFirst("New Trait".count)))
+                    }
+                    return nil
+                }.max() ?? -1
+                let nextName = highestNumber == -1 ? "New Trait" : "New Trait\(highestNumber + 1)"
+                modelContext.insert(Traits(name: nextName))
+                
             } label: {
                 Label("Add samples", systemImage: "plus")
             }
@@ -148,7 +158,10 @@ struct SidebarView: View {
     func completeRename() {
         guard let oldName = tagToRename?.name else { return }
         
-        // 1. Update all Traits with the same name
+        if traits.contains(where: { $0.name == newTagName }) {
+            // TO DO ERROR HANDLING AND SHOWCASE TO USER 
+              return
+          }
         for trait in traits where trait.name == oldName {
             trait.name = newTagName
         }
