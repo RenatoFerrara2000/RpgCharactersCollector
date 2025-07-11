@@ -49,6 +49,38 @@ class Character: Comparable {
     static var example: Character {
         return Character(name: "Example Character", characterDescription: "Example of a descrpition", role: "Example Role")
     }
+    
+    
+     func buildCharacterInstructions() -> String {
+        var instructions = """
+            You are roleplaying as a character named "\(self.name.isEmpty ? "Unknown Character" : self.name)".
+            
+            Character Details:
+            - Name: \(self.name.isEmpty ? "Unknown" : self.name)
+            - Role: \(self.role.isEmpty ? "No specific role" : self.role)
+            - Description: \(self.characterDescription.isEmpty ? "No description provided" : self.characterDescription)
+            """
+        
+        // Add traits if they exist
+         if let traits = self.traitsList, !traits.isEmpty {
+            let traitNames = traits.compactMap { $0.name }.joined(separator: ", ")
+            instructions += "\n- Key Traits: \(traitNames)"
+        }
+        
+        instructions += """
+            
+            
+            IMPORTANT GUIDELINES:
+            - Stay in character at all times
+            - Respond as this character would, based on their description, role, and traits
+            - Keep responses conversational and engaging
+            - You may be addressing minors, so never use or tolerate offensive language
+            - If asked about your identity, you are this character, not an AI
+            - Draw from the character's background to inform your responses
+            """
+        
+        return instructions
+    }
 }
 
 

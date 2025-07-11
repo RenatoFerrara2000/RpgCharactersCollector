@@ -10,6 +10,18 @@ import Foundation
 struct ApiClient {
     var apiKey: String
     
+    func sendMessage(_ prompt: String, messages: [Message], instructions: String) async throws -> Message {
+            let trimmedPrompt = prompt.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard prompt.isEmpty == false else {throw ChatError.emptyPrompt}
+            let response = try await generateText(
+                from: trimmedPrompt,
+                instructions: instructions,
+                conversationHistory: messages
+            )
+            
+            return Message(id: response.id, text: response.message, isAI: true)
+        }
+    
     func generateText(
         from prompt: String,
         instructions: String,
@@ -86,4 +98,9 @@ struct HTTPError: Error, LocalizedError {
             return "HTTP error \(statusCode)"
         }
     }
+}
+
+
+enum ChatError: Error {
+    case emptyPrompt
 }

@@ -13,6 +13,7 @@ struct AwardsView: View {
     @State private var selectedAward = Award.example
     @State private var showingAwardDetails = false
     
+    // Presentation Logic
     var awardTitle: String {
         if selectedAward.hasEarned( modelContext: modelContext){
             let format = NSLocalizedString("Unlocked: %@", comment: "Award unlocked title")

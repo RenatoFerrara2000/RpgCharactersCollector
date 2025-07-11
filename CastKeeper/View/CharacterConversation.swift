@@ -37,90 +37,38 @@ struct CharacterConversation: View {
                 HStack {
                     TextField("Write Something", text: $messageText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onSubmit(sendMessage)
+                        .onSubmit(sendChatMessage)
                     
-                    Button("Send", action: sendMessage)
+                    Button("Send", action: sendChatMessage)
                         .disabled(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
                 .padding()
             }
         }
     }
-    
-    func sendMessage(){
-        let prompt = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard prompt.isEmpty == false else {return}
-        
+}
+
+
+extension CharacterConversation {
+    // P
+    func sendChatMessage() {
+        let prompt = messageText
         messageText = ""
         
         withAnimation {
             messages.append(Message(text: prompt, isAI: false))
         }
+        
         Task {
-             do {
-                let response = try await client.generateText(
-                    from: prompt,
-                    instructions: buildCharacterInstructions(),
-                    conversationHistory: messages.dropLast() // Exclude the message we just added
-                )
-                
-                let newMessage = Message(id: response.id, text: response.message, isAI: true)
+            do {
+                let response = try await client.sendMessage(prompt, messages: messages.dropLast(), instructions:  character.buildCharacterInstructions())
                 withAnimation {
-                    messages.append(newMessage)
+                    messages.append(response)
                 }
-                
             } catch {
-                
-                if let htppsError = error as? HTTPError{
-                    print("HTTP error: \(htppsError.localizedDescription)")
-                }
-                if let urlError = error as? URLError {
-                    print("URL Error: \(urlError.localizedDescription)")
-                } else if let decodingError = error as? DecodingError {
-                    print("Decoding Error: \(decodingError.localizedDescription)")
-                }
-                
-                let errorMessage = Message(
-                    id: UUID().uuidString,
-                    text: "Sorry, I couldn't generate a response. Please try again.",
-                    isAI: true
-                )
-                withAnimation {
-                    messages.append(errorMessage)
-                }
+                print(error)
             }
         }
-    }
-    
-    private func buildCharacterInstructions() -> String {
-        var instructions = """
-            You are roleplaying as a character named "\(character.name.isEmpty ? "Unknown Character" : character.name)".
-            
-            Character Details:
-            - Name: \(character.name.isEmpty ? "Unknown" : character.name)
-            - Role: \(character.role.isEmpty ? "No specific role" : character.role)
-            - Description: \(character.characterDescription.isEmpty ? "No description provided" : character.characterDescription)
-            """
-        
-        // Add traits if they exist
-        if let traits = character.traitsList, !traits.isEmpty {
-            let traitNames = traits.compactMap { $0.name }.joined(separator: ", ")
-            instructions += "\n- Key Traits: \(traitNames)"
-        }
-        
-        instructions += """
-            
-            
-            IMPORTANT GUIDELINES:
-            - Stay in character at all times
-            - Respond as this character would, based on their description, role, and traits
-            - Keep responses conversational and engaging
-            - You may be addressing minors, so never use or tolerate offensive language
-            - If asked about your identity, you are this character, not an AI
-            - Draw from the character's background to inform your responses
-            """
-        
-        return instructions
     }
 }
 

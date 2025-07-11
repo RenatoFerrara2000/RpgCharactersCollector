@@ -19,6 +19,7 @@ struct Award: Decodable, Identifiable {
     static let allAwards = Bundle.main.decode("Awards.json", as: [Award].self)
     static let example = allAwards[0]
     
+    // Business Logic
     func hasEarned(modelContext: ModelContext) -> Bool {
         switch criterion {
         case "character":
