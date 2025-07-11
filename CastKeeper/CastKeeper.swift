@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct ExampleAppApp: App {
+struct CastKeeper: App {
     @State private var viewModel = ViewModel()
 
     var body: some Scene {
