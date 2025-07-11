@@ -4,7 +4,6 @@
 //
 //  Created by Renato Ferrara on 28/04/25.
 //
-
 import SwiftUI
 import SwiftData
 
@@ -12,7 +11,6 @@ struct ContentView: View {
     @Query var characterArray: [Character]
     @Query var allTraits: [Traits]
     
-
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
     @Binding var selectedCharacter: Character?
@@ -20,86 +18,19 @@ struct ContentView: View {
     @State private var searchText = ""
     @State var filterTokens = [Traits]()
     @State private var currentTokens = [Traits]()
-    @State private var suggestions: [Traits] = [] // New state for suggestions
+    @State private var suggestions: [Traits] = []
  
-
-
     var suggestedTraits: [Traits] {
-            if searchText.starts(with: "#") {
-               return allTraits
-           } else {
-               return []
-           }
+        if searchText.starts(with: "#") {
+           return allTraits
+       } else {
+           return []
        }
-
+    }
     
     var charactersFiltered: [Character] {
-        let filter = viewModel.selectedFilter ?? viewModel.all
-        var result = characterArray
-        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespaces)
-
-        result = characterArray.filter { character in
-            
-            // Check if filter has a specific trait
-            if let trait = filter.trait {
-                    if let traits = character.traitsList {
-                        // Then check if any trait in the list matches the name
-                        return traits.contains { $0.name == trait.name }
-                    } else {
-                        // If traitsList is nil, this character doesn't have the trait
-                        return false
-                    }
-            }
-            
-            if searchText.isEmpty == false {
-                // If we have search text, make sure this item matches.
-                if character.name.localizedCaseInsensitiveContains(trimmedSearchText) == false {
-                    return false
-                }
-            }
-            
-            if currentTokens.isEmpty == false {
-                // If we have search tokens, loop through them all to make sure one of them matches our movie.
-                for token in currentTokens {
-                    for trait in character.traitsList ?? [] {
-                        if token.name.localizedCaseInsensitiveContains(trait.name) {
-                            return true
-                        }
-                    }
-                }
-                return false
-            }
-            return true
-        }
-        // Check if filter has a specific date
-        if filter.minModificationDate != Date.distantPast {
-            result = result.filter { character in
-                (character.modificationDate ?? character.creationDate) > filter.minModificationDate
-                
-            }
-        }
-        return result.sorted { char1, char2 in
-                        if viewModel.filterEnabled {
-                            if viewModel.sortType == .dateCreated {
-                                if viewModel.sortNewestFirst {
-                                    return char1.creationDate > char2.creationDate
-                                } else {
-                                    return char1.creationDate < char2.creationDate
-                                }
-                            } else {
-                                let date1 = char1.modificationDate ?? char1.creationDate
-                                let date2 = char2.modificationDate ?? char2.creationDate
-                                if viewModel.sortNewestFirst {
-                                    return date1 > date2
-                                } else {
-                                    return date1 < date2
-                                }
-                            }
-                        } else {
-                            return char1.name < char2.name
-                        }
-                    }
-                }
+        filterCharacters()
+    }
     
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -111,12 +42,12 @@ struct ContentView: View {
             }
             .searchable(text: $searchText, tokens: $currentTokens, suggestedTokens: $suggestions, prompt: Text("Type to filter, or use # for traits")) { token in
                 Text( token.name)
-                      }
+            }
             .onChange(of: searchText) { oldValue, newValue in
                 if newValue.starts(with: "#") {
                     suggestions = allTraits
                 } else {
-                    suggestions = [] 
+                    suggestions = []
                 }
             }
             .toolbar {
@@ -166,6 +97,75 @@ struct ContentView: View {
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
            
         }.onAppear(){
+        }
+    }
+    
+    private func filterCharacters() -> [Character] {
+        let filter = viewModel.selectedFilter ?? viewModel.all
+        var result = characterArray
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespaces)
+
+        result = characterArray.filter { character in
+            
+            // Check if filter has a specific trait
+            if let trait = filter.trait {
+                    if let traits = character.traitsList {
+                        // Then check if any trait in the list matches the name
+                        return traits.contains { $0.name == trait.name }
+                    } else {
+                        // If traitsList is nil, this character doesn't have the trait
+                        return false
+                    }
+            }
+            
+            if searchText.isEmpty == false {
+                // If we have search text, make sure this item matches.
+                if character.name.localizedCaseInsensitiveContains(trimmedSearchText) == false {
+                    return false
+                }
+            }
+            
+            if currentTokens.isEmpty == false {
+                // If we have search tokens, loop through them all to make sure one of them matches our movie.
+                for token in currentTokens {
+                    for trait in character.traitsList ?? [] {
+                        if token.name.localizedCaseInsensitiveContains(trait.name) {
+                            return true
+                        }
+                    }
+                }
+                return false
+            }
+            return true
+        }
+        
+        // Check if filter has a specific date
+        if filter.minModificationDate != Date.distantPast {
+            result = result.filter { character in
+                (character.modificationDate ?? character.creationDate) > filter.minModificationDate
+            }
+        }
+        
+        return result.sorted { char1, char2 in
+            if viewModel.filterEnabled {
+                if viewModel.sortType == .dateCreated {
+                    if viewModel.sortNewestFirst {
+                        return char1.creationDate > char2.creationDate
+                    } else {
+                        return char1.creationDate < char2.creationDate
+                    }
+                } else {
+                    let date1 = char1.modificationDate ?? char1.creationDate
+                    let date2 = char2.modificationDate ?? char2.creationDate
+                    if viewModel.sortNewestFirst {
+                        return date1 > date2
+                    } else {
+                        return date1 < date2
+                    }
+                }
+            } else {
+                return char1.name < char2.name
+            }
         }
     }
         

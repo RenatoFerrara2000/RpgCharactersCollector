@@ -57,8 +57,7 @@ struct CharacterConversation: View {
             messages.append(Message(text: prompt, isAI: false))
         }
         Task {
-            let lastAiMessage = messages.last(where: \.isAI)
-            do {
+             do {
                 let response = try await client.generateText(
                     from: prompt,
                     instructions: buildCharacterInstructions(),
