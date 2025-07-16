@@ -73,5 +73,5 @@ extension CharacterConversation {
 }
 
 #Preview {
-    CharacterConversation(character: .example)
+    CharacterConversation(character: .exampleCharacters[0])
 }

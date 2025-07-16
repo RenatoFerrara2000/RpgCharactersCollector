@@ -52,6 +52,6 @@ struct CharacterView: View {
 
 
 #Preview {
-    CharacterView(character: .example)
+    CharacterView(character: .exampleCharacters[0])
         .environment(ViewModel())
 }

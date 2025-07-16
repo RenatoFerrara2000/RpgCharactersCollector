@@ -68,5 +68,5 @@ struct TraitMenuView: View {
 }
 
 #Preview {
-    TraitMenuView(character: .example, allTraits: [Traits.example])
+    TraitMenuView(character: .exampleCharacters[0], allTraits: Traits.exampleTraits)
 }

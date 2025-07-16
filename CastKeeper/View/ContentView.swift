@@ -12,7 +12,7 @@ struct ContentView: View {
     @Query var allTraits: [Traits]
     
     @Environment(\.modelContext) var modelContext
-    @Environment(ViewModel.self) private var viewModel
+    @State private var viewModel = ViewModel()
     @Binding var selectedCharacter: Character?
     
     @State private var searchText = ""
@@ -173,34 +173,12 @@ extension ContentView {
 
 
 #Preview {
-         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try! ModelContainer(for: Character.self, Traits.self, configurations: config)
-        
-        // Create a sample character with traits
-        let romeo = Character(name: "Romeo", characterDescription: "A very strong hero", role: "hero")
-        
-        // Create some sample traits
-        let brave = Traits(name: "Brave")
-        let intelligent = Traits(name: "Intelligent")
-        let charismatic = Traits(name: "Charismatic")
-        
-        // Add traits to the character
-        romeo.traitsList = [brave, intelligent, charismatic]
-        
-        // Insert everything into the context
-        container.mainContext.insert(romeo)
-        container.mainContext.insert(brave)
-        container.mainContext.insert(intelligent)
-        container.mainContext.insert(charismatic)
-
-
-        
-        // Create a binding for the selected character
-        let viewModel = ViewModel()
-        
-        // Return the ContentView with the appropriate environment
-        return ContentView(selectedCharacter: .constant(romeo))
-            .modelContainer(container)
-            .environment(viewModel)
+    let preview = Preview()
+    preview.addSamples(Character.exampleCharacters)
+    let viewModel = ViewModel()
+    
+    return  ContentView(selectedCharacter: .constant(Character.exampleCharacters[0]))
+        .modelContainer(preview.container)
+        .environment(viewModel)
 
 }

@@ -26,7 +26,7 @@ import SwiftData
 
     
 #Preview {
-    DetailView(selectedCharacter: Character.example)
+    DetailView(selectedCharacter: Character.exampleCharacters[0])
  }
 
  
