@@ -26,5 +26,4 @@ struct NoCharacterView: View {
 
 #Preview {
     NoCharacterView()
-        .environment(ViewModel())
-}
+ }
