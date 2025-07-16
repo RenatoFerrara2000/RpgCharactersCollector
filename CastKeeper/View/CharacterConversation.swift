@@ -7,17 +7,13 @@
 import SwiftUI
 
 struct CharacterConversation: View {
-    @State private var client = ApiClient(apiKey: "n...no")
-    
+    @State private var viewModel = ViewModel()
     var character: Character
-    
-    @State private var messages = [Message]()
-    @State private var messageText =  ""
-    
+ 
     var body: some View {
         Section("Chat") {
             VStack(spacing: 0) {
-                List(messages) { message in
+                List(viewModel.messages) { message in
                     HStack {
                         if message.isAI {
                             Image(systemName: "figure.fencing")
@@ -35,38 +31,21 @@ struct CharacterConversation: View {
                 .frame(minHeight: 200)
                 
                 HStack {
-                    TextField("Write Something", text: $messageText)
+                    TextField("Write Something", text: $viewModel.messageText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onSubmit(sendChatMessage)
+                        .onSubmit {
+                            viewModel.sendChatMessage(char: character)
+                        }
                     
-                    Button("Send", action: sendChatMessage)
-                        .disabled(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button{
+                        viewModel.sendChatMessage(char: character)
+
+                    } label: {
+                        Text("Send")
+                    }
+                    .disabled(viewModel.canSendMessage)
                 }
                 .padding()
-            }
-        }
-    }
-}
-
-
-extension CharacterConversation {
-    // Presentation Logic
-    func sendChatMessage() {
-        let prompt = messageText
-        messageText = ""
-        
-        withAnimation {
-            messages.append(Message(text: prompt, isAI: false))
-        }
-        
-        Task {
-            do {
-                let response = try await client.sendMessage(prompt, messages: messages.dropLast(), instructions:  character.buildCharacterInstructions())
-                withAnimation {
-                    messages.append(response)
-                }
-            } catch {
-                print(error)
             }
         }
     }
