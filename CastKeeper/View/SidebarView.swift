@@ -180,7 +180,11 @@ extension SidebarView {
 
 
 #Preview {
-    SidebarView(selectedFilter: .constant(nil))
+    let preview = Preview(Traits.self)
+    preview.addSamples(Traits.exampleTraits)
+    
+   return  SidebarView(selectedFilter: .constant(nil))
+        .modelContainer(preview.container)
         .environment(ViewModel())
 }
 

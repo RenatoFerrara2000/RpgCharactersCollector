@@ -173,7 +173,7 @@ extension ContentView {
 
 
 #Preview {
-    let preview = Preview()
+    let preview = Preview(Character.self)
     preview.addSamples(Character.exampleCharacters)
     let viewModel = ViewModel()
     
