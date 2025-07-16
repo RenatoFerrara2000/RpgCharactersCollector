@@ -20,6 +20,7 @@ import SwiftData
                             minModificationDate: Date.now.addingTimeInterval((86400 * -7)))
         
         var selectedFilter: Filter?
+        
    var selectedCharacter: Character? {
               didSet {
                   print("Selected character changed to: \(selectedCharacter?.name ?? "None")")

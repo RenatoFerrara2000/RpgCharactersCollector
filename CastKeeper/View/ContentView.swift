@@ -11,9 +11,8 @@ struct ContentView: View {
     @Query var characterArray: [Character]
  
     @Environment(\.modelContext) var modelContext
-    @State private var viewModel = ViewModel()
-    @Binding var selectedCharacter: Character?
-    
+    @Environment(ViewModel.self) private var viewModel
+
     
     var charactersFiltered: [Character] {
         viewModel.filterCharacters(characterArray: characterArray)
@@ -22,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         @Bindable var viewModel = viewModel
         NavigationStack {
-            List(selection: $selectedCharacter) {
+            List(selection: $viewModel.selectedCharacter) {
                 ForEach(charactersFiltered) { character in
                     CharacterRow(character: character)
                 }.onDelete(perform: deleteCharacter)
@@ -104,7 +103,8 @@ extension ContentView {
     preview.addSamples(Character.exampleCharacters)
     let viewModel = ViewModel()
     
-    return  ContentView(selectedCharacter: .constant(Character.exampleCharacters[0]))
+ 
+   return ContentView()
         .modelContainer(preview.container)
         .environment(viewModel)
 

@@ -15,13 +15,13 @@ struct CastKeeper: App {
     var body: some Scene {
         WindowGroup {
             NavigationSplitView {
-                SidebarView(selectedFilter: $viewModel.selectedFilter)
+                SidebarView()
             } content: {
-                ContentView(selectedCharacter: $viewModel.selectedCharacter)
+                ContentView()
             } detail: {
-                DetailView(selectedCharacter: viewModel.selectedCharacter)
+                DetailView()
             }
-            .modelContainer(for: Character.self)
+            .modelContainer(for: [Character.self, Traits.self] )
             .environment(viewModel)
           }
     }

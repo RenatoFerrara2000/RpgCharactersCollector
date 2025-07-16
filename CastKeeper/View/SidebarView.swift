@@ -11,7 +11,6 @@ import SwiftData
 struct SidebarView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
-    @Binding var selectedFilter: Filter?
     @Query var characters: [Character]
     @Query var traits: [Traits]
     
@@ -34,7 +33,9 @@ struct SidebarView: View {
     }
     
     var body: some View {
-        List(selection: $selectedFilter) {
+        @Bindable var viewModel = viewModel
+
+        List(selection: $viewModel.selectedFilter) {
             Section("Smart filters") {
                 ForEach(viewModel.smartFilters!){ filter in
                     NavigationLink(value: filter) {
@@ -183,7 +184,7 @@ extension SidebarView {
     let preview = Preview(Traits.self)
     preview.addSamples(Traits.exampleTraits)
     
-   return  SidebarView(selectedFilter: .constant(nil))
+   return  SidebarView()
         .modelContainer(preview.container)
         .environment(ViewModel())
 }
