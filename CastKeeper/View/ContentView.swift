@@ -191,7 +191,7 @@ struct ContentView: View {
     
     func deleteCharacter(_ offsets: IndexSet) {
         for offset in offsets {
-            modelContext.delete(characterArray[offset])
+            modelContext.delete(charactersFiltered[offset])
         }
 
     }
