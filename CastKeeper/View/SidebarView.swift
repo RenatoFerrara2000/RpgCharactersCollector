@@ -111,7 +111,9 @@ struct SidebarView: View {
             Button("Cancel", role: .cancel) {}
             TextField("New Name", text: $newTagName)
         }
-        .sheet(isPresented: $showingAwards, content: AwardsView.init)
+        .sheet(isPresented: $showingAwards) {
+            AwardsView()
+        }
         
     }
     

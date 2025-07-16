@@ -4,64 +4,58 @@
 //
 //  Created by Renato Ferrara on 16/05/25.
 //
-
 import SwiftUI
 import SwiftData
 
 struct AwardsView: View {
     @Environment(\.modelContext) var modelContext
-    @State private var selectedAward = Award.example
-    @State private var showingAwardDetails = false
-    
-    // Presentation Logic
-    var awardTitle: String {
-        if selectedAward.hasEarned( modelContext: modelContext){
-            let format = NSLocalizedString("Unlocked: %@", comment: "Award unlocked title")
-            return String(format: format, selectedAward.name)
-        } else {
-            return NSLocalizedString("Locked", comment: "Award locked title")
-        }
-    }
+    @State private var viewModel = ViewModel()
 
     var columns: [GridItem] {
         [GridItem(.adaptive(minimum: 100, maximum: 100))]
     }
     
-    
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(Award.allAwards) { award in
+                    ForEach(viewModel.allAwards) { award in
                         Button {
-                            selectedAward = award
-                            showingAwardDetails = true
+                             viewModel.selectAward(award)
                         } label: {
                             Image(systemName: award.image)
                                 .resizable()
                                 .scaledToFit()
                                 .padding()
                                 .frame(width: 100, height: 100)
-                                .foregroundColor(award.hasEarned( modelContext: modelContext) ? Color(award.color) : .secondary.opacity(0.5))
-
-                        }.accessibilityLabel(
-                            award.hasEarned( modelContext: modelContext) ? "Unlocked: \(award.name)" : "Locked"
+                                // Remove $ - this should be a direct method call
+                                .foregroundColor(viewModel.awardColor(for: award))
+                        }
+                        .accessibilityLabel(
+                            // Remove $ - this should be a direct method call
+                            viewModel.accessibilityLabel(for: award)
                         )
                         .accessibilityHint(award.description)
                     }
                 }
             }
             .navigationTitle("Awards")
-            
-        }.alert(awardTitle, isPresented: $showingAwardDetails) {
+        }
+        .alert(
+             viewModel.awardTitle(for: viewModel.selectedAward),
+            isPresented: $viewModel.showingAwardDetails
+        ) {
+            // Empty action closure
         } message: {
-            Text(selectedAward.description)
+             Text(viewModel.selectedAward.description)
+        }
+        .onAppear {
+             viewModel.modelContext = modelContext
         }
     }
-    
 }
 
 #Preview {
-    AwardsView()
+  //  AwardsView()
     
 }

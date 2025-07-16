@@ -15,31 +15,7 @@ struct Award: Decodable, Identifiable {
     var criterion: String
     var value: Int
     var image: String
-
     static let allAwards = Bundle.main.decode("Awards.json", as: [Award].self)
     static let example = allAwards[0]
-    
-    // Business Logic
-    func hasEarned(modelContext: ModelContext) -> Bool {
-        switch criterion {
-        case "character":
-            // returns true if they added a certain number of issues
-            let descriptor = FetchDescriptor<Character>()
-            let awardCount = (try? modelContext.fetchCount(descriptor)) ?? 0
-            return awardCount >= value
-
-        case "traits":
-            // return true if they created a certain number of tags
-            let descriptor = FetchDescriptor<Traits>()
-            let awardCount = (try? modelContext.fetchCount(descriptor)) ?? 0
-            return awardCount >= value
-
-        default:
-            // an unknown award criterion; this should never be allowed
-            // fatalError("Unknown award criterion: \(award.criterion)")
-            return false
-        }
-    }
-    
     
 }
