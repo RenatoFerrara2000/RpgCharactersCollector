@@ -9,10 +9,8 @@ import SwiftData
 
 struct ContentView: View {
     @Query var characterArray: [Character]
- 
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
-
     
     var charactersFiltered: [Character] {
         viewModel.filterCharacters(characterArray: characterArray)
@@ -31,14 +29,7 @@ struct ContentView: View {
             }
             .toolbar {
                 Button{
-                    let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
-                    modelContext.insert(newCharacter)
-                    
-                    if let  trait = viewModel.selectedFilter?.trait  {
-                        newCharacter.traitsList = [Traits(name: trait.name, owner: newCharacter)]
-                    }
-                    viewModel.selectedCharacter = newCharacter
-                    
+                    addCharacter()
                 } label: {
                     NavigationLink(destination: DetailView()) {
                         Label("New Character", systemImage: "square.and.pencil")
@@ -80,20 +71,21 @@ struct ContentView: View {
 }
 
 extension ContentView {
-    
+ 
     func deleteCharacter(_ offsets: IndexSet) {
         for offset in offsets {
             modelContext.delete(characterArray[offset])
         }
-
     }
     
-    func deleteAll() {
-        do {
-            try modelContext.delete(model: Character.self)
-        } catch {
-            print("Failed to delete characters.")
+    func addCharacter() {
+        let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
+        modelContext.insert(newCharacter)
+        
+        if let  trait = viewModel.selectedFilter?.trait  {
+            newCharacter.traitsList = [Traits(name: trait.name, owner: newCharacter)]
         }
+        viewModel.selectedCharacter = newCharacter
     }
 }
 

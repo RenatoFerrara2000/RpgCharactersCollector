@@ -21,8 +21,7 @@ struct NoCharacterView: View {
             }()) {
                 Text("New Character")
                     .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .foregroundColor(.blue)
                     .cornerRadius(8)
             }
         }

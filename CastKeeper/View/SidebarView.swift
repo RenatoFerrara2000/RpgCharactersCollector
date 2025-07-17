@@ -14,13 +14,7 @@ struct SidebarView: View {
     @Query var characters: [Character]
     @Query var traits: [Traits]
     
-    
-    @State private var   tagToRename: Traits?
-    @State private var   newTagName: String = ""
-    @State private var   isRenamingTag: Bool = false
-    @State private var showingAwards = false
-    
-    
+    @State private var newViewModel = NewViewModel()
     
     // build a list of Filter out of traits
     var traitsFilter: [Filter] {
@@ -45,7 +39,6 @@ struct SidebarView: View {
             }
             
             Section("Traits"){
-                let grouped = Dictionary(grouping: traits, by: { $0.name })
                 ForEach(traitsFilter){ filter in
                     NavigationLink(value: filter){
                         Label(filter.name, systemImage: filter.icon)
@@ -59,7 +52,7 @@ struct SidebarView: View {
                                 
                                 Button {
                                     guard let traitSelected = traits.first(where: { $0.name == filter.name }) else { return }
-                                    renameTrait(traitSelected)
+                                    newViewModel.renameTrait(traitSelected)
                                 } label: {
                                     Label("Rename", systemImage: "pencil")
                                 }
@@ -84,8 +77,9 @@ struct SidebarView: View {
                 Label("Add samples", systemImage: "key")
             }
 #endif
+            
             Button {
-                showingAwards.toggle()
+                newViewModel.showingAwards.toggle()
             } label: {
                 Label("Show awards", systemImage: "rosette")
             }
@@ -107,12 +101,12 @@ struct SidebarView: View {
             }
         }
         .navigationTitle("Filters")
-        .alert("Rename Character", isPresented: $isRenamingTag){
-            Button("OK", action: completeRename)
+        .alert("Rename Character", isPresented: $newViewModel.isRenamingTag){
+            Button("OK") { newViewModel.completeRename(traits: traits) }
             Button("Cancel", role: .cancel) {}
-            TextField("New Name", text: $newTagName)
+            TextField("New Name", text: $newViewModel.newTagName)
         }
-        .sheet(isPresented: $showingAwards) {
+        .sheet(isPresented: $newViewModel.showingAwards) {
             AwardsView()
         }
         
@@ -121,18 +115,8 @@ struct SidebarView: View {
 }
 
 extension SidebarView {
-    func countCharactersWithTrait(traitName: String) -> Int {
-        var count = 0
-        
-        for character in characters {
-            if let traits = character.traitsList {
-                if traits.contains(where: { $0.name == traitName }) {
-                    count += 1
-                }
-            }
-        }
-        return count
-    }
+    
+    // All functions that depend on SwiftData
     
     func deleteTraits(_ offsets: IndexSet) {
         for offset in offsets {
@@ -154,31 +138,24 @@ extension SidebarView {
         }
     }
     
-    func renameTrait(_ trait: Traits) {
-        tagToRename = trait
-        newTagName = trait.name
-        isRenamingTag = true
-        
+    func countCharactersWithTrait(traitName: String) -> Int {
+        var count = 0
+        for character in characters {
+            if let traits = character.traitsList {
+                if traits.contains(where: { $0.name == traitName }) {
+                    count += 1
+                }
+            }
+        }
+        return count
     }
     
-    func completeRename() {
-        guard let oldName = tagToRename?.name else { return }
-        
-        if traits.contains(where: { $0.name == newTagName }) {
-            // TO DO ERROR HANDLING AND SHOWCASE TO USER 
-              return
-          }
-        for trait in traits where trait.name == oldName {
-            trait.name = newTagName
-        }
-    }
     
     func delete(_ filter: Filter) {
         guard let trait = filter.trait else { return }
-        modelContext.delete( trait)
+        modelContext.delete(trait)
      }
 }
-
 
 #Preview {
     let preview = Preview(Traits.self)
@@ -188,4 +165,3 @@ extension SidebarView {
         .modelContainer(preview.container)
         .environment(ViewModel())
 }
-
