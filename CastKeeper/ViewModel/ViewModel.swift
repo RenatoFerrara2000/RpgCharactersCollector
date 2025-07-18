@@ -10,6 +10,7 @@ import SwiftData
 // extension ContentView{
 @Observable
     class ViewModel {
+        
         let all = Filter(id: UUID(),
                          name: NSLocalizedString("All Filters", comment: "Filter name for showing all items"),
                          icon: "tray")
@@ -21,18 +22,6 @@ import SwiftData
         
         var selectedFilter: Filter?
         
-   var selectedCharacter: Character? {
-              didSet {
-                  print("Selected character changed to: \(selectedCharacter?.name ?? "None")")
-              }
-          }
-        var sortType = SortType.dateCreated
-        
-        
-        
-        
-        var sortNewestFirst = true
-        var filterEnabled = false
         
         
         
@@ -45,7 +34,16 @@ import SwiftData
             
         }
         
+        var selectedCharacter: Character? {
+            didSet {
+                print("my value is: \(selectedCharacter?.name ?? "Nothing")")
+            }
+        }
         // Content View
+        var sortType = SortType.dateCreated
+        var sortNewestFirst = true
+        var filterEnabled = false
+
         
           var searchText = ""
           var currentTokens = [Traits]()

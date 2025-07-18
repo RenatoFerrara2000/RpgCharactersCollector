@@ -14,7 +14,7 @@ struct SidebarView: View {
     @Query var characters: [Character]
     @Query var traits: [Traits]
     
-    @State private var newViewModel = NewViewModel()
+    @State private var sidebarViewModel = SidebarViewModel()
     
     // build a list of Filter out of traits
     var traitsFilter: [Filter] {
@@ -52,7 +52,7 @@ struct SidebarView: View {
                                 
                                 Button {
                                     guard let traitSelected = traits.first(where: { $0.name == filter.name }) else { return }
-                                    newViewModel.renameTrait(traitSelected)
+                                    sidebarViewModel.renameTrait(traitSelected)
                                 } label: {
                                     Label("Rename", systemImage: "pencil")
                                 }
@@ -79,7 +79,7 @@ struct SidebarView: View {
 #endif
             
             Button {
-                newViewModel.showingAwards.toggle()
+                sidebarViewModel.showingAwards.toggle()
             } label: {
                 Label("Show awards", systemImage: "rosette")
             }
@@ -101,12 +101,12 @@ struct SidebarView: View {
             }
         }
         .navigationTitle("Filters")
-        .alert("Rename Character", isPresented: $newViewModel.isRenamingTag){
-            Button("OK") { newViewModel.completeRename(traits: traits) }
+        .alert("Rename Character", isPresented: $sidebarViewModel.isRenamingTag){
+            Button("OK") { sidebarViewModel.completeRename(traits: traits) }
             Button("Cancel", role: .cancel) {}
-            TextField("New Name", text: $newViewModel.newTagName)
+            TextField("New Name", text: $sidebarViewModel.newTagName)
         }
-        .sheet(isPresented: $newViewModel.showingAwards) {
+        .sheet(isPresented: $sidebarViewModel.showingAwards) {
             AwardsView()
         }
         

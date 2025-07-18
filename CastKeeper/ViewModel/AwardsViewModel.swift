@@ -11,7 +11,7 @@ import SwiftData
 extension AwardsView {
     
     @Observable
-    class ViewModel {
+    class AwardsViewModel {
         
         var selectedAward: Award = Award.example
         var showingAwardDetails = false

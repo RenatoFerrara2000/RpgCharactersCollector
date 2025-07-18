@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct CharacterConversation: View {
-    @State private var viewModel = ViewModel()
+    @State private var viewModel = CharacterConversationViewModel()
     var character: Character
  
     var body: some View {

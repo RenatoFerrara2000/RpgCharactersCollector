@@ -8,7 +8,7 @@ import SwiftUI
 
 extension SidebarView {
     @Observable
-    class NewViewModel {
+    class SidebarViewModel {
         var selectedFilter: Filter?
         var tagToRename: Traits?
         var newTagName: String = ""

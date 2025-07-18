@@ -9,7 +9,7 @@ import SwiftUI
 extension CharacterConversation {
     @Observable
     @MainActor // TO REVIEW
-    class ViewModel {
+    class CharacterConversationViewModel {
          var messages = [Message]()
            var messageText = ""
         

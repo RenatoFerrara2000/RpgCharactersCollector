@@ -9,7 +9,7 @@ import SwiftData
 
 struct AwardsView: View {
     @Environment(\.modelContext) var modelContext
-    @State private var viewModel = ViewModel()
+    @State private var viewModel = AwardsViewModel()
 
     var columns: [GridItem] {
         [GridItem(.adaptive(minimum: 100, maximum: 100))]
@@ -28,11 +28,9 @@ struct AwardsView: View {
                                 .scaledToFit()
                                 .padding()
                                 .frame(width: 100, height: 100)
-                                // Remove $ - this should be a direct method call
                                 .foregroundColor(viewModel.awardColor(for: award))
                         }
                         .accessibilityLabel(
-                            // Remove $ - this should be a direct method call
                             viewModel.accessibilityLabel(for: award)
                         )
                         .accessibilityHint(award.description)

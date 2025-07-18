@@ -79,7 +79,7 @@ extension ContentView {
     }
     
     func addCharacter() {
-        let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
+         let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
         modelContext.insert(newCharacter)
         
         if let  trait = viewModel.selectedFilter?.trait  {
