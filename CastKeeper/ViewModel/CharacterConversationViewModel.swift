@@ -13,7 +13,7 @@ extension CharacterConversation {
          var messages = [Message]()
            var messageText = ""
         
-     var client = ApiClient(apiKey: " NOOOOO")
+        var client = ApiClient(apiKey: "\(Secrets.$apiKeyCl)")
         
         var canSendMessage: Bool {
               !messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

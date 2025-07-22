@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		52C1DF892E2FD4AE00E8690E /* _ConfidentialKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C1DF892E2FD4AE00E8690E /* _ConfidentialKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +77,15 @@
 			buildRules = (
 			);
 			dependencies = (
+				52C1DF8F2E2FD4CC00E8690E /* PBXTargetDependency */,
+				52C1DF8B2E2FD4C400E8690E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				52F1B8252DBF7E76006FBDD2 /* CastKeeper */,
 			);
 			name = CastKeeper;
 			packageProductDependencies = (
+				52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */,
 			);
 			productName = ExampleApp;
 			productReference = 52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */;
@@ -108,6 +116,10 @@
 			);
 			mainGroup = 52F1B81A2DBF7E76006FBDD2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				52C1DF7E2E2FD17D00E8690E /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */,
+				52C1DF872E2FD4AE00E8690E /* XCRemoteSwiftPackageReference "swift-confidential" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 52F1B8242DBF7E76006FBDD2 /* Products */;
 			projectDirPath = "";
@@ -137,6 +149,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		52C1DF8B2E2FD4C400E8690E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 52C1DF8A2E2FD4C400E8690E /* Confidential */;
+		};
+		52C1DF8F2E2FD4CC00E8690E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 52C1DF8E2E2FD4CC00E8690E /* _ConfidentialKit */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		52F1B8302DBF7E78006FBDD2 /* Debug */ = {
@@ -359,6 +382,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		52C1DF7E2E2FD17D00E8690E /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/securevale/swift-confidential-plugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+		52C1DF872E2FD4AE00E8690E /* XCRemoteSwiftPackageReference "swift-confidential" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/securevale/swift-confidential";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C1DF872E2FD4AE00E8690E /* XCRemoteSwiftPackageReference "swift-confidential" */;
+			productName = _ConfidentialKit;
+		};
+		52C1DF8A2E2FD4C400E8690E /* Confidential */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C1DF7E2E2FD17D00E8690E /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */;
+			productName = "plugin:Confidential";
+		};
+		52C1DF8E2E2FD4CC00E8690E /* _ConfidentialKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52C1DF872E2FD4AE00E8690E /* XCRemoteSwiftPackageReference "swift-confidential" */;
+			productName = _ConfidentialKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 52F1B81B2DBF7E76006FBDD2 /* Project object */;
 }
