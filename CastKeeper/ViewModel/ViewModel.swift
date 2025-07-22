@@ -34,11 +34,7 @@ import SwiftData
             
         }
         
-        var selectedCharacter: Character? {
-            didSet {
-                print("my value is: \(selectedCharacter?.name ?? "Nothing")")
-            }
-        }
+        var selectedCharacter: Character? 
         // Content View
         var sortType = SortType.dateCreated
         var sortNewestFirst = true

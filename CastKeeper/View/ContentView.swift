@@ -31,38 +31,11 @@ struct ContentView: View {
                 Button{
                     addCharacter()
                 } label: {
-                    NavigationLink(destination: DetailView()) {
-                        Label("New Character", systemImage: "square.and.pencil")
-                    }
+                    Label("New Character", systemImage: "square.and.pencil")
+                  
+                    TraitsMenuView()
                 }
-                Menu {
-                    Button(viewModel.filterEnabled ? "Turn Filter Off" : "Turn Filter On") {
-                        viewModel.filterEnabled.toggle()
-                    }
-                    
-                    Divider()
-                    
-                    Menu("Sort By") {
-                        
-                        Picker("Sort By", selection: $viewModel.sortType) {
-                            Text("Date Created").tag(SortType.dateCreated)
-                            Text("Date Modified").tag(SortType.dateModified)
-                        }
-                        
-                        Divider()
-                        
-                        
-                        Picker("Sort Order", selection: $viewModel.sortNewestFirst) {
-                            Text("Newest to Oldest").tag(true)
-                            Text("Oldest to Newest").tag(false)
-                        }
-                        
-                    }
-                    
-                    
-                } label: {
-                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
-                    .symbolVariant(viewModel.filterEnabled ? .fill : .none)                }
+                
             }
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
             
@@ -71,7 +44,7 @@ struct ContentView: View {
 }
 
 extension ContentView {
- 
+    
     func deleteCharacter(_ offsets: IndexSet) {
         for offset in offsets {
             modelContext.delete(characterArray[offset])
@@ -79,7 +52,8 @@ extension ContentView {
     }
     
     func addCharacter() {
-         let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
+        print("adding character")
+        let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
         modelContext.insert(newCharacter)
         
         if let  trait = viewModel.selectedFilter?.trait  {
@@ -95,9 +69,9 @@ extension ContentView {
     preview.addSamples(Character.exampleCharacters)
     let viewModel = ViewModel()
     
- 
-   return ContentView()
+    
+    return ContentView()
         .modelContainer(preview.container)
         .environment(viewModel)
-
+    
 }
