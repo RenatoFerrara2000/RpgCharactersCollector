@@ -11,17 +11,10 @@ import SwiftData
 struct SidebarView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel
-    @Binding var selectedFilter: Filter?
     @Query var characters: [Character]
     @Query var traits: [Traits]
     
-    
-    @State private var   tagToRename: Traits?
-    @State private var   newTagName: String = ""
-    @State private var   isRenamingTag: Bool = false
-    @State private var showingAwards = false
-
-    
+    @State private var sidebarViewModel = SidebarViewModel()
     
     // build a list of Filter out of traits
     var traitsFilter: [Filter] {
@@ -34,7 +27,9 @@ struct SidebarView: View {
     }
     
     var body: some View {
-        List(selection: $selectedFilter) {
+        @Bindable var viewModel = viewModel
+
+        List(selection: $viewModel.selectedFilter) {
             Section("Smart filters") {
                 ForEach(viewModel.smartFilters!){ filter in
                     NavigationLink(value: filter) {
@@ -44,7 +39,6 @@ struct SidebarView: View {
             }
             
             Section("Traits"){
-                let grouped = Dictionary(grouping: traits, by: { $0.name })
                 ForEach(traitsFilter){ filter in
                     NavigationLink(value: filter){
                         Label(filter.name, systemImage: filter.icon)
@@ -58,7 +52,7 @@ struct SidebarView: View {
                                 
                                 Button {
                                     guard let traitSelected = traits.first(where: { $0.name == filter.name }) else { return }
-                                    renameTrait(traitSelected)
+                                    sidebarViewModel.renameTrait(traitSelected)
                                 } label: {
                                     Label("Rename", systemImage: "pencil")
                                 }
@@ -66,13 +60,13 @@ struct SidebarView: View {
                             .accessibilityElement()
                             .accessibilityLabel(filter.name)
                             .accessibilityHint("^[\(countCharactersWithTrait(traitName: filter.name)) character](inflect: true)")
- 
+                        
                     }
                 }.onDelete(perform: deleteTraits)
             }
-
+            
         }
-         .toolbar{
+        .toolbar{
             // will not be in production
 #if DEBUG
             Button {
@@ -83,8 +77,9 @@ struct SidebarView: View {
                 Label("Add samples", systemImage: "key")
             }
 #endif
+            
             Button {
-                showingAwards.toggle()
+                sidebarViewModel.showingAwards.toggle()
             } label: {
                 Label("Show awards", systemImage: "rosette")
             }
@@ -105,28 +100,23 @@ struct SidebarView: View {
                 Label("Add samples", systemImage: "plus")
             }
         }
-         .navigationTitle("Filters")
-        .alert("Rename Character", isPresented: $isRenamingTag){
-            Button("OK", action: completeRename)
+        .navigationTitle("Filters")
+        .alert("Rename Character", isPresented: $sidebarViewModel.isRenamingTag){
+            Button("OK") { sidebarViewModel.completeRename(traits: traits) }
             Button("Cancel", role: .cancel) {}
-            TextField("New Name", text: $newTagName)
+            TextField("New Name", text: $sidebarViewModel.newTagName)
         }
-        .sheet(isPresented: $showingAwards, content: AwardsView.init)
-
+        .sheet(isPresented: $sidebarViewModel.showingAwards) {
+            AwardsView()
+        }
+        
     }
     
-    func countCharactersWithTrait(traitName: String) -> Int {
-        var count = 0
-        
-        for character in characters {
-            if let traits = character.traitsList {
-                if traits.contains(where: { $0.name == traitName }) {
-                    count += 1
-                }
-            }
-        }
-        return count
-    }
+}
+
+extension SidebarView {
+    
+    // All functions that depend on SwiftData
     
     func deleteTraits(_ offsets: IndexSet) {
         for offset in offsets {
@@ -148,34 +138,30 @@ struct SidebarView: View {
         }
     }
     
-    func renameTrait(_ trait: Traits) {
-        tagToRename = trait
-        newTagName = trait.name
-        isRenamingTag = true
-        
+    func countCharactersWithTrait(traitName: String) -> Int {
+        var count = 0
+        for character in characters {
+            if let traits = character.traitsList {
+                if traits.contains(where: { $0.name == traitName }) {
+                    count += 1
+                }
+            }
+        }
+        return count
     }
     
-    func completeRename() {
-        guard let oldName = tagToRename?.name else { return }
-        
-        if traits.contains(where: { $0.name == newTagName }) {
-            // TO DO ERROR HANDLING AND SHOWCASE TO USER 
-              return
-          }
-        for trait in traits where trait.name == oldName {
-            trait.name = newTagName
-        }
-    }
     
     func delete(_ filter: Filter) {
         guard let trait = filter.trait else { return }
-        modelContext.delete( trait)
+        modelContext.delete(trait)
      }
 }
 
-
 #Preview {
-    SidebarView(selectedFilter: .constant(nil))
+    let preview = Preview(Traits.self)
+    preview.addSamples(Traits.exampleTraits)
+    
+   return  SidebarView()
+        .modelContainer(preview.container)
         .environment(ViewModel())
 }
-

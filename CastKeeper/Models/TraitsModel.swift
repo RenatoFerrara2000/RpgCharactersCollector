@@ -35,7 +35,4 @@ class Traits: Comparable {
          self.name = name
     }
     
-    static var example: Traits {
-        return Traits(name: "Example Trait")
-    }
 }

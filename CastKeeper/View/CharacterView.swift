@@ -30,7 +30,7 @@ struct CharacterView: View {
                         Text("**Modified:** \(character.modificationDate!.formatted(date: .long, time: .shortened))")
                             .foregroundStyle(.secondary)
                     }
-                    TraitMenuView(character: character, allTraits: allTraits)
+                    CharacterTraitList(character: character, allTraits: allTraits)
                 }
             }
             
@@ -52,6 +52,6 @@ struct CharacterView: View {
 
 
 #Preview {
-    CharacterView(character: .example)
+    CharacterView(character: .exampleCharacters[0])
         .environment(ViewModel())
 }

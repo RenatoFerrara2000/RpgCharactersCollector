@@ -40,15 +40,13 @@ class Character: Comparable {
 
     }
     
-    init( name: String, characterDescription: String, role: String) {
+    init( name: String, characterDescription: String, role: String, characterTraits: [Traits]? = nil) {
          self.name = name
         self.characterDescription = characterDescription
         self.role = role
+        self.traitsList = characterTraits
+
       }
- 
-    static var example: Character {
-        return Character(name: "Example Character", characterDescription: "Example of a descrpition", role: "Example Role")
-    }
 }
 
 

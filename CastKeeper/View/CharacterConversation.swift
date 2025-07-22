@@ -7,17 +7,13 @@
 import SwiftUI
 
 struct CharacterConversation: View {
-    @State private var client = ApiClient(apiKey: "n...no")
-    
+    @State private var viewModel = CharacterConversationViewModel()
     var character: Character
-    
-    @State private var messages = [Message]()
-    @State private var messageText =  ""
-    
+ 
     var body: some View {
         Section("Chat") {
             VStack(spacing: 0) {
-                List(messages) { message in
+                List(viewModel.messages) { message in
                     HStack {
                         if message.isAI {
                             Image(systemName: "figure.fencing")
@@ -35,95 +31,26 @@ struct CharacterConversation: View {
                 .frame(minHeight: 200)
                 
                 HStack {
-                    TextField("Write Something", text: $messageText)
+                    TextField("Write Something", text: $viewModel.messageText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onSubmit(sendMessage)
+                        .onSubmit {
+                            viewModel.sendChatMessage(char: character)
+                        }
                     
-                    Button("Send", action: sendMessage)
-                        .disabled(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button{
+                        viewModel.sendChatMessage(char: character)
+
+                    } label: {
+                        Text("Send")
+                    }
+                    .disabled(viewModel.canSendMessage)
                 }
                 .padding()
             }
         }
     }
-    
-    func sendMessage(){
-        let prompt = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard prompt.isEmpty == false else {return}
-        
-        messageText = ""
-        
-        withAnimation {
-            messages.append(Message(text: prompt, isAI: false))
-        }
-        Task {
-             do {
-                let response = try await client.generateText(
-                    from: prompt,
-                    instructions: buildCharacterInstructions(),
-                    conversationHistory: messages.dropLast() // Exclude the message we just added
-                )
-                
-                let newMessage = Message(id: response.id, text: response.message, isAI: true)
-                withAnimation {
-                    messages.append(newMessage)
-                }
-                
-            } catch {
-                
-                if let htppsError = error as? HTTPError{
-                    print("HTTP error: \(htppsError.localizedDescription)")
-                }
-                if let urlError = error as? URLError {
-                    print("URL Error: \(urlError.localizedDescription)")
-                } else if let decodingError = error as? DecodingError {
-                    print("Decoding Error: \(decodingError.localizedDescription)")
-                }
-                
-                let errorMessage = Message(
-                    id: UUID().uuidString,
-                    text: "Sorry, I couldn't generate a response. Please try again.",
-                    isAI: true
-                )
-                withAnimation {
-                    messages.append(errorMessage)
-                }
-            }
-        }
-    }
-    
-    private func buildCharacterInstructions() -> String {
-        var instructions = """
-            You are roleplaying as a character named "\(character.name.isEmpty ? "Unknown Character" : character.name)".
-            
-            Character Details:
-            - Name: \(character.name.isEmpty ? "Unknown" : character.name)
-            - Role: \(character.role.isEmpty ? "No specific role" : character.role)
-            - Description: \(character.characterDescription.isEmpty ? "No description provided" : character.characterDescription)
-            """
-        
-        // Add traits if they exist
-        if let traits = character.traitsList, !traits.isEmpty {
-            let traitNames = traits.compactMap { $0.name }.joined(separator: ", ")
-            instructions += "\n- Key Traits: \(traitNames)"
-        }
-        
-        instructions += """
-            
-            
-            IMPORTANT GUIDELINES:
-            - Stay in character at all times
-            - Respond as this character would, based on their description, role, and traits
-            - Keep responses conversational and engaging
-            - You may be addressing minors, so never use or tolerate offensive language
-            - If asked about your identity, you are this character, not an AI
-            - Draw from the character's background to inform your responses
-            """
-        
-        return instructions
-    }
 }
 
 #Preview {
-    CharacterConversation(character: .example)
+    CharacterConversation(character: .exampleCharacters[0])
 }

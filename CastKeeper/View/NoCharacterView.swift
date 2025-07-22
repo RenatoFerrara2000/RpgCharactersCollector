@@ -9,22 +9,24 @@ import SwiftUI
 
 struct NoCharacterView: View {
     @Environment(\.modelContext) var modelContext
- 
+    @Environment(ViewModel.self) private var viewModel
+    
     var body: some View {
-        Text("No character selected")
-            .font(.title)
-        
-        Button("Add Character") {
-         
+        VStack {
+            Text("No character selected")
+                .font(.title)
+            
+            Button("New Character") {
+                let char = Character(name: "New Character", characterDescription: "", role: "")
+                modelContext.insert(char)
+                
+                // Set the newly created character as selected
+                viewModel.selectedCharacter = char
+            }
+            .buttonStyle(.borderedProminent)
         }
-        Button("New Character") {
-            modelContext.insert(Character(name: "New Character", characterDescription: "", role: ""))
-        }
-
     }
 }
-
 #Preview {
     NoCharacterView()
-        .environment(ViewModel())
-}
+ }

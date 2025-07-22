@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct TraitMenuView: View {
+struct CharacterTraitList: View {
     var character: Character
     var allTraits: [Traits]
     
@@ -68,5 +68,5 @@ struct TraitMenuView: View {
 }
 
 #Preview {
-    TraitMenuView(character: .example, allTraits: [Traits.example])
+    CharacterTraitList(character: .exampleCharacters[0], allTraits: Traits.exampleTraits)
 }

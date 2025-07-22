@@ -43,5 +43,5 @@ struct CharacterRow: View {
 }
 
 #Preview {
-    CharacterRow(character: .example)
+    CharacterRow(character: .exampleCharacters[0])
 }
