@@ -5,7 +5,6 @@
 //  Created by Renato Ferrara on 30/06/25.
 //
 
-
 import Foundation
 
 struct Message: Identifiable, Equatable {

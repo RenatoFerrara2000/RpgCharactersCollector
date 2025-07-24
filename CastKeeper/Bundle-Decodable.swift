@@ -8,7 +8,6 @@
 import Foundation
 
 extension Bundle {
-    
     func decode<T: Decodable>(
         _ file: String,
         as type: T.Type = T.self,

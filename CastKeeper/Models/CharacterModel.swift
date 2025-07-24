@@ -5,7 +5,6 @@
 //  Created by Renato Ferrara on 28/04/25.
 //
 
-
 import SwiftData
 import Foundation
 
@@ -20,10 +19,10 @@ class Character: Comparable {
     // can't be a let due to swift 6, SwiftData needs to be able to write to the object when loading it from storage.
     private(set) var creationDate = Date.now
     
-    // SwiftData automatically knows and connects traits to  the character. MUST be optional because of relationship
     var modificationDate: Date?
  
     //  When this character is deleted, remove its trait owner
+    // SwiftData automatically knows and connects traits to  the character. MUST be optional because of relationship
     @Relationship(deleteRule: .nullify, inverse: \Traits.characterRelated)
     var traitsList: [Traits]?
 
@@ -37,16 +36,12 @@ class Character: Comparable {
         } else {
             return left < right
         }
-
     }
     
     init( name: String, characterDescription: String, role: String, characterTraits: [Traits]? = nil) {
-         self.name = name
+        self.name = name
         self.characterDescription = characterDescription
         self.role = role
         self.traitsList = characterTraits
-
-      }
+    }
 }
-
-

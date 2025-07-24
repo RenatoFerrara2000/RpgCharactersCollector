@@ -23,6 +23,6 @@ struct CastKeeper: App {
             }
             .modelContainer(for: [Character.self, Traits.self] )
             .environment(viewModel)
-          }
+        }
     }
 }

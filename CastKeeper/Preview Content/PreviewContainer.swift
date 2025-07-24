@@ -7,7 +7,7 @@
 import Foundation
 import SwiftData
 
-@MainActor //to quickly fix data racing errors 
+@MainActor // to quickly fix data racing errors
 struct Preview {
     let container: ModelContainer
     
@@ -21,10 +21,10 @@ struct Preview {
         }
     }
     
-    func addSamples(_ examples: [any PersistentModel] ){
-              Task {
-                 examples.forEach { char in
-                     container.mainContext.insert(char)
+    func addSamples(_ examples: [any PersistentModel] ) {
+        Task {
+            examples.forEach { char in
+                container.mainContext.insert(char)
             }
         }
     }

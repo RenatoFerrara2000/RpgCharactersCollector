@@ -16,10 +16,9 @@ extension SidebarView {
         var showingAwards = false
         
         func getTraitsFilter(from traits: [Traits]) -> [Filter] {
-            let grouped = Dictionary(grouping: traits, by: { $0.name })
+            let grouped = Dictionary(grouping: traits) { $0.name }
             let sortedGrouped = grouped.sorted { $0.key < $1.key }
-            
-            return sortedGrouped.map { (name, traits) in
+            return sortedGrouped.map { name, traits in
                 Filter(id: traits.first!.id, name: name, icon: "tag", trait: traits.first!)
             }
         }

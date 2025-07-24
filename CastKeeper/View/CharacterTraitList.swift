@@ -15,12 +15,11 @@ struct CharacterTraitList: View {
         if traits.isEmpty {
             return NSLocalizedString("No Traits", comment: "")
         } else {
-           
             return traits.map { $0.name }.sorted().joined(separator: ", ")
         }
     }
     
-    var body:   some View {
+    var body: some View {
         Menu {
             // Trait character already has
             if let traits = character.traitsList {

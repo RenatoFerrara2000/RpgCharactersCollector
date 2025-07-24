@@ -77,6 +77,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				521445842E327BB7005EA9E8 /* PBXTargetDependency */,
 				52C1DF8F2E2FD4CC00E8690E /* PBXTargetDependency */,
 				52C1DF8B2E2FD4C400E8690E /* PBXTargetDependency */,
 			);
@@ -119,6 +120,7 @@
 			packageReferences = (
 				52C1DF7E2E2FD17D00E8690E /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */,
 				52C1DF872E2FD4AE00E8690E /* XCRemoteSwiftPackageReference "swift-confidential" */,
+				521444B82E327B0B005EA9E8 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 52F1B8242DBF7E76006FBDD2 /* Products */;
@@ -151,6 +153,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		521445842E327BB7005EA9E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 521445832E327BB7005EA9E8 /* SwiftLintBuildToolPlugin */;
+		};
 		52C1DF8B2E2FD4C400E8690E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 52C1DF8A2E2FD4C400E8690E /* Confidential */;
@@ -384,6 +390,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		521444B82E327B0B005EA9E8 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.59.1;
+			};
+		};
 		52C1DF7E2E2FD17D00E8690E /* XCRemoteSwiftPackageReference "swift-confidential-plugin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/securevale/swift-confidential-plugin";
@@ -403,6 +417,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		521445832E327BB7005EA9E8 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 521444B82E327B0B005EA9E8 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
 		52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 52C1DF872E2FD4AE00E8690E /* XCRemoteSwiftPackageReference "swift-confidential" */;

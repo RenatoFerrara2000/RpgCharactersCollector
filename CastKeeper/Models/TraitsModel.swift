@@ -10,7 +10,6 @@ import Foundation
 
 @Model
 class Traits: Comparable {
-    
     // Func for Comparable
     static func < (lhs: Traits, rhs: Traits) -> Bool {
         let left = lhs.name.localizedLowercase
@@ -23,16 +22,13 @@ class Traits: Comparable {
         }
     }
     
-     // When a trait is deleted, just remove its reference from the character's trait list 
+    // When a trait is deleted, just remove its reference from the character's trait list
     @Relationship(deleteRule: .nullify, inverse: \Character.traitsList)
-
-  
     var id = UUID()
     var name: String = "Trait name"
     var characterRelated: Character?
     
     init( name: String, owner: Character? = nil) {
-         self.name = name
+        self.name = name
     }
-    
 }

@@ -11,16 +11,16 @@ struct ApiClient {
     var apiKey: String
     
     func sendMessage(_ prompt: String, messages: [Message], instructions: String) async throws -> Message {
-            let trimmedPrompt = prompt.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedPrompt = prompt.trimmingCharacters(in: .whitespacesAndNewlines)
         guard prompt.isEmpty == false else {throw ChatError.emptyPrompt}
-            let response = try await generateText(
-                from: trimmedPrompt,
-                instructions: instructions,
-                conversationHistory: messages
-            )
-            
-            return Message(id: response.id, text: response.message, isAI: true)
-        }
+        let response = try await generateText(
+            from: trimmedPrompt,
+            instructions: instructions,
+            conversationHistory: messages
+        )
+        
+        return Message(id: response.id, text: response.message, isAI: true)
+    }
     
     func generateText(
         from prompt: String,
@@ -31,7 +31,7 @@ struct ApiClient {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        request.setValue("application/json" , forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         request.setValue("\(apiKey)", forHTTPHeaderField: "X-API-Key")
         
@@ -48,27 +48,26 @@ struct ApiClient {
             ])
         }
         
-         let systemMessage = instructions
- 
+        let systemMessage = instructions
+        
         messages.append([
             "role": "user",
             "content": prompt
         ])
         
-         let requestBody: [String: Any] = [
+        let requestBody: [String: Any] = [
             "model": "claude-3-5-haiku-20241022",
             "max_tokens": 1024,
             "messages": messages,
             "system": systemMessage
         ]
         do {
-            
             request.httpBody =  try JSONSerialization.data(withJSONObject: requestBody)
             
             let (data, response) = try await URLSession.shared.data(for: request)
             
             if let httpResponse = response as? HTTPURLResponse,
-               httpResponse.statusCode != 200 {
+            httpResponse.statusCode != 200 {
                 throw HTTPError(statusCode: httpResponse.statusCode)
             }
             
@@ -99,7 +98,6 @@ struct HTTPError: Error, LocalizedError {
         }
     }
 }
-
 
 enum ChatError: Error {
     case emptyPrompt

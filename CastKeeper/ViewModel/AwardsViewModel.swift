@@ -9,15 +9,13 @@ import SwiftUI
 import SwiftData
 
 extension AwardsView {
-    
     @Observable
     class AwardsViewModel {
-        
-        var selectedAward: Award = Award.example
+        var selectedAward = Award.example
         var showingAwardDetails = false
         var allAwards = Award.allAwards
         
-        var modelContext: ModelContext? = nil
+        var modelContext: ModelContext?
         
         func isAwardEarned(_ award: Award) -> Bool {
             switch award.criterion {
@@ -62,5 +60,4 @@ extension AwardsView {
             showingAwardDetails = true
         }
     }
-    
 }

@@ -37,9 +37,8 @@ struct CharacterConversation: View {
                             viewModel.sendChatMessage(char: character)
                         }
                     
-                    Button{
+                    Button {
                         viewModel.sendChatMessage(char: character)
-
                     } label: {
                         Text("Send")
                     }

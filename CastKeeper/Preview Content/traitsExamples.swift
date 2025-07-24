@@ -19,6 +19,5 @@ extension Traits {
             Traits(name: "Ambitious"),
             Traits(name: "Sarcastic")
         ]
-        
     }
 }

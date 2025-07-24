@@ -18,29 +18,29 @@ struct SidebarView: View {
     
     // build a list of Filter out of traits
     var traitsFilter: [Filter] {
-        let grouped = Dictionary(grouping: traits, by: { $0.name })
+        let grouped = Dictionary(grouping: traits) { $0.name }
         let sortedGrouped = grouped.sorted { $0.key < $1.key }
         
-        return sortedGrouped.map { (name, traits) in
+        return sortedGrouped.map { name, traits in
             Filter(id: traits.first!.id, name: name, icon: "tag", trait: traits.first!)
         }
     }
     
     var body: some View {
         @Bindable var viewModel = viewModel
-
+        
         List(selection: $viewModel.selectedFilter) {
             Section("Smart filters") {
-                ForEach(viewModel.smartFilters!){ filter in
+                ForEach(viewModel.smartFilters!) { filter in
                     NavigationLink(value: filter) {
                         Label(filter.name, systemImage: filter.icon)
                     }
                 }
             }
             
-            Section("Traits"){
-                ForEach(traitsFilter){ filter in
-                    NavigationLink(value: filter){
+            Section("Traits") {
+                ForEach(traitsFilter) { filter in
+                    NavigationLink(value: filter) {
                         Label(filter.name, systemImage: filter.icon)
                             .badge(countCharactersWithTrait(traitName: filter.name))
                             .contextMenu {
@@ -60,15 +60,13 @@ struct SidebarView: View {
                             .accessibilityElement()
                             .accessibilityLabel(filter.name)
                             .accessibilityHint("^[\(countCharactersWithTrait(traitName: filter.name)) character](inflect: true)")
-                        
                     }
                 }.onDelete(perform: deleteTraits)
             }
-            
         }
-        .toolbar{
+        .toolbar {
             // will not be in production
-#if DEBUG
+        #if DEBUG
             Button {
                 modelContext.insert(Traits(name: "New Trait"))
                 modelContext.insert(Traits(name: "New Trait2"))
@@ -76,7 +74,7 @@ struct SidebarView: View {
             } label: {
                 Label("Add samples", systemImage: "key")
             }
-#endif
+        #endif
             
             Button {
                 sidebarViewModel.showingAwards.toggle()
@@ -95,13 +93,12 @@ struct SidebarView: View {
                 }.max() ?? -1
                 let nextName = highestNumber == -1 ? "New Trait" : "New Trait\(highestNumber + 1)"
                 modelContext.insert(Traits(name: nextName))
-                
             } label: {
                 Label("Add samples", systemImage: "plus")
             }
         }
         .navigationTitle("Filters")
-        .alert("Rename Character", isPresented: $sidebarViewModel.isRenamingTag){
+        .alert("Rename Character", isPresented: $sidebarViewModel.isRenamingTag) {
             Button("OK") { sidebarViewModel.completeRename(traits: traits) }
             Button("Cancel", role: .cancel) {}
             TextField("New Name", text: $sidebarViewModel.newTagName)
@@ -109,13 +106,10 @@ struct SidebarView: View {
         .sheet(isPresented: $sidebarViewModel.showingAwards) {
             AwardsView()
         }
-        
     }
-    
 }
 
 extension SidebarView {
-    
     // All functions that depend on SwiftData
     
     func deleteTraits(_ offsets: IndexSet) {
@@ -126,7 +120,7 @@ extension SidebarView {
             for character in characters {
                 // Only attempt to modify traitsList if it exists
                 if var traits = character.traitsList {
-                    traits.removeAll(where: { $0.name == traitName })
+                    traits.removeAll { $0.name == traitName }
                     character.traitsList = traits
                 }
             }
@@ -150,18 +144,17 @@ extension SidebarView {
         return count
     }
     
-    
     func delete(_ filter: Filter) {
         guard let trait = filter.trait else { return }
         modelContext.delete(trait)
-     }
+    }
 }
 
 #Preview {
     let preview = Preview(Traits.self)
     preview.addSamples(Traits.exampleTraits)
     
-   return  SidebarView()
+    return  SidebarView()
         .modelContainer(preview.container)
         .environment(ViewModel())
 }

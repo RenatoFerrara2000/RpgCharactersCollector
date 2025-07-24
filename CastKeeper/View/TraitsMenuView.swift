@@ -20,7 +20,6 @@ struct TraitsMenuView: View {
             Divider()
             
             Menu("Sort By") {
-                
                 Picker("Sort By", selection: $viewModel.sortType) {
                     Text("Date Created").tag(SortType.dateCreated)
                     Text("Date Modified").tag(SortType.dateModified)
@@ -28,22 +27,17 @@ struct TraitsMenuView: View {
                 
                 Divider()
                 
-                
                 Picker("Sort Order", selection: $viewModel.sortNewestFirst) {
                     Text("Newest to Oldest").tag(true)
                     Text("Oldest to Newest").tag(false)
                 }
-                
             }
-            
-            
         } label: {
             Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
-            .symbolVariant(viewModel.filterEnabled ? .fill : .none)                }
-        
+            .symbolVariant(viewModel.filterEnabled ? .fill : .none)
+        }
     }
 }
-
 
 #Preview {
     TraitsMenuView()

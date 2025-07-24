@@ -8,9 +8,9 @@
 import SwiftUI
 import SwiftData
 
- struct DetailView: View {
-     @Environment(ViewModel.self) private var viewModel
-
+struct DetailView: View {
+    @Environment(ViewModel.self) private var viewModel
+    
     var body: some View {
         VStack {
             if let character = viewModel.selectedCharacter {
@@ -24,10 +24,7 @@ import SwiftData
     }
 }
 
-    
 #Preview {
     DetailView()
         .environment(ViewModel())
- }
-
- 
+}

@@ -21,7 +21,7 @@ struct AwardsView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.allAwards) { award in
                         Button {
-                             viewModel.selectAward(award)
+                            viewModel.selectAward(award)
                         } label: {
                             Image(systemName: award.image)
                                 .resizable()
@@ -40,23 +40,19 @@ struct AwardsView: View {
             .navigationTitle("Awards")
         }
         .alert(
-             viewModel.awardTitle(for: viewModel.selectedAward),
+            viewModel.awardTitle(for: viewModel.selectedAward),
             isPresented: $viewModel.showingAwardDetails
         ) {
             // Empty action closure
         } message: {
-             Text(viewModel.selectedAward.description)
+            Text(viewModel.selectedAward.description)
         }
         .onAppear {
-             viewModel.modelContext = modelContext
+            viewModel.modelContext = modelContext
         }
     }
 }
 
 #Preview {
-    
-    
-    
- AwardsView()
-    
+    AwardsView()
 }

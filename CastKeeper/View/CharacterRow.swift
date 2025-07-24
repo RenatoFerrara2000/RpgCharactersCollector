@@ -12,18 +12,17 @@ struct CharacterRow: View {
     
     var character: Character
     var body: some View {
-        
         NavigationLink(value: character) {
-            HStack{
+            HStack {
                 Image(systemName: "figure.fencing")
                     .imageScale(.large)
                 
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text(character.name)
                         .font(.headline)
                         .lineLimit(1)
                 
-                    ForEach(character.traitsList ?? []){ trait in
+                    ForEach(character.traitsList ?? []) { trait in
                         Text(trait.name)
                     }
                     .lineLimit(1)
@@ -31,7 +30,6 @@ struct CharacterRow: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    
                     Text(character.creationDate.formatted(date: .abbreviated, time: .omitted))
                         .accessibilityLabel(character.creationDate.formatted(date: .abbreviated, time: .omitted))
                         .font(.subheadline)
@@ -39,7 +37,6 @@ struct CharacterRow: View {
             }
         }
     }
-    
 }
 
 #Preview {

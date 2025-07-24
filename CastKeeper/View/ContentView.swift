@@ -28,23 +28,20 @@ struct ContentView: View {
                 Text( token.name)
             }
             .toolbar {
-                Button{
+                Button {
                     addCharacter()
                 } label: {
                     Label("New Character", systemImage: "square.and.pencil")
                   
                     TraitsMenuView()
                 }
-                
             }
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
-            
         }
     }
 }
 
 extension ContentView {
-    
     func deleteCharacter(_ offsets: IndexSet) {
         for offset in offsets {
             modelContext.delete(charactersFiltered[offset])
@@ -56,22 +53,19 @@ extension ContentView {
         let newCharacter = Character(name: "New Character", characterDescription: "", role: "")
         modelContext.insert(newCharacter)
         
-        if let  trait = viewModel.selectedFilter?.trait  {
+        if let  trait = viewModel.selectedFilter?.trait {
             newCharacter.traitsList = [Traits(name: trait.name, owner: newCharacter)]
         }
         viewModel.selectedCharacter = newCharacter
     }
 }
 
-
 #Preview {
     let preview = Preview(Character.self)
     preview.addSamples(Character.exampleCharacters)
     let viewModel = ViewModel()
-    
-    
+
     return ContentView()
         .modelContainer(preview.container)
         .environment(viewModel)
-    
 }

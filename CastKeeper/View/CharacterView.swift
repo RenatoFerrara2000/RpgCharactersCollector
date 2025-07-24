@@ -8,22 +8,20 @@ import SwiftUI
 import SwiftData
 
 struct CharacterView: View {
-    
     @State  var character: Character
     @Environment(\.modelContext) var modelContext
     @Query var allTraits: [Traits]
     
     var body: some View {
-        Form{
-            Section{
+        Form {
+            Section {
                 VStack(alignment: .leading) {
                     TextField("Character name", text: $character.name, prompt: Text("Enter the character name"))
                         .font(.title)
                     
                     TextField("Role", text: $character.role, prompt: Text("Enter the character role"))
                     
-                    if(character.modificationDate == nil)
-                    {
+                    if character.modificationDate == nil {
                         Text("**Created:** \(character.creationDate.formatted(date: .long, time: .shortened))")
                             .foregroundStyle(.secondary)
                     } else {
@@ -43,14 +41,12 @@ struct CharacterView: View {
                     TextField("Description", text: $character.characterDescription, prompt: Text("Enter Character Description"))
                 }
             }
-            Section{
+            Section {
                 CharacterConversation(character: character )
             }
         }
     }
 }
-
-
 #Preview {
     CharacterView(character: .exampleCharacters[0])
         .environment(ViewModel())

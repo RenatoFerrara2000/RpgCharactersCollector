@@ -15,11 +15,11 @@ struct Filter: Identifiable, Hashable {
     var minModificationDate = Date.distantPast
     var trait: Traits?
     
-    func hash(into hasher: inout Hasher){
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
     
-    static func ==(lhs: Filter, rhs: Filter) -> Bool {
+    static func == (lhs: Filter, rhs: Filter) -> Bool {
         lhs.id == rhs.id
     }
 }
