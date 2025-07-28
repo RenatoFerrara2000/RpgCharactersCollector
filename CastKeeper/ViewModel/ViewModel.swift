@@ -30,6 +30,7 @@ class ViewModel {
     }
     
     var selectedCharacter: Character?
+     
     // Content View
     var sortType = SortType.dateCreated
     var sortNewestFirst = true
@@ -39,12 +40,19 @@ class ViewModel {
     var currentTokens = [Traits]()
     var suggestions: [Traits] = []
     
-    func filterCharacters(characterArray: [Character], ) -> [Character] {
-        let filter =  selectedFilter ??  all
+    func filterCharacters(characterArray: [Character] ) -> [Character] {
         var result = characterArray
-        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespaces)
         
-        result = characterArray.filter { character in
+        result = applyTraitFilter(to: result)
+        result = applySearchTextFilter(to: result)
+        result = applyTokenFilter(to: result)
+        result = applyDateFilter(to: result)
+        return applySorting(to: result)
+    }
+    
+    func applyTraitFilter(to characterArray: [Character]) -> [Character] {
+        let filter = selectedFilter ?? all
+        return characterArray.filter { character in
             // Check if filter has a specific trait
             if let trait = filter.trait {
                 if let traits = character.traitsList {
@@ -55,34 +63,46 @@ class ViewModel {
                     return false
                 }
             }
-            
-            if searchText.isEmpty == false {
-                // If we have search text, make sure this item matches.
-                if character.name.localizedCaseInsensitiveContains(trimmedSearchText) == false {
-                    return false
-                }
-            }
-            
-            if currentTokens.isEmpty == false {
-                // If we have search tokens, loop through them all to make sure one of them matches our movie.
-                for token in currentTokens {
-                    for trait in character.traitsList ?? []  where token.name.localizedCaseInsensitiveContains(trait.name) {
-                        return true
-                    }
-                }
-                return false
-            }
+            // If filter has no specific trait, include all characters
             return true
         }
+    }
+    
+    func applySearchTextFilter(to characters: [Character]) -> [Character] {
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespaces)
+        guard !trimmedSearchText.isEmpty else { return characters }
         
-        // Check if filter has a specific date
-        if filter.minModificationDate != Date.distantPast {
-            result = result.filter { character in
-                (character.modificationDate ?? character.creationDate) > filter.minModificationDate
-            }
+        return characters.filter { character in
+            character.name.localizedCaseInsensitiveContains(trimmedSearchText)
         }
+    }
+    
+    func applyTokenFilter(to characters: [Character]) -> [Character] {
+        guard !currentTokens.isEmpty else { return characters }
         
-        return result.sorted { char1, char2 in
+        return characters.filter { character in
+            for token in currentTokens {
+                for trait in character.traitsList ?? [] where token.name.localizedCaseInsensitiveContains(trait.name) {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+    
+    private func applyDateFilter(to characters: [Character]) -> [Character] {
+        let filter =  selectedFilter ??  all
+        
+        guard filter.minModificationDate != Date.distantPast else { return characters }
+        
+        return characters.filter { character in
+            let dateToCheck = character.modificationDate ?? character.creationDate
+            return dateToCheck > filter.minModificationDate
+        }
+    }
+    
+    func applySorting (to characters: [Character]) -> [Character] {
+        return characters.sorted { char1, char2 in
             if filterEnabled {
                 if  sortType == .dateCreated {
                     if  sortNewestFirst {
