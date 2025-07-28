@@ -7,7 +7,20 @@
 
 import Foundation
 
-/// Filter for the characters, can rely on modification date or traits
+// swiftlint:disable all
+/**
+## Overview
+ This model is used  filter the characters
+ 
+ ## Parameters
+  - `id`: id of the filter
+ - `name`:  name of the filter
+ - `icon`:  icon of the filter
+ - `minModificationDate`:   minimum modification date for the filter
+ - `trait`:  Trait to filter by
+ 
+ */
+ // swiftlint:enable all
 struct Filter: Identifiable, Hashable {
     var id: UUID
     var name: String

@@ -7,7 +7,7 @@
 import Foundation
 import SwiftData
 
-@MainActor // to quickly fix data racing errors
+@MainActor // to quickly fix data racing errors TODO: check if there is a better way
 struct Preview {
     let container: ModelContainer
     

@@ -8,6 +8,25 @@
 import SwiftData
 import Foundation
 
+// swiftlint:disable all
+/**
+## Overview
+ This model is used  to rappresent  Characters  that the user can create.
+ 
+ ## Parameters
+  - `name`: Name of the Character
+ - `description`:  description of the Character
+ - `role`:  role assigned to the character
+ - `creationDate`:  When the user was created
+ - `modificationDate`:  Last time the Character wad modified
+ - `traitsList`:  A list of traits the character  
+ 
+ - `allAwards`: Array of all the awards
+ - `example`:  single example of an award
+
+
+ */
+ // swiftlint:enable all
 @Model
 class Character: Comparable {
     //  due to cloudKit: All properties must either have default values or be marked as optional, alongside their initializer.
