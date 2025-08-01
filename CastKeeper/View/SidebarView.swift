@@ -7,7 +7,83 @@
 
 import SwiftUI
 import SwiftData
+/**
 
+ ## Overview
+
+ SwiftUI sidebar view that provides navigation filters and trait management functionality, featuring smart filters, trait-based filtering, and comprehensive trait operations.
+
+ ## SidebarView
+
+ Primary navigation sidebar with filtering and trait management capabilities.
+
+ ## Architecture
+
+ ### Data Management
+ - `@Query var characters` - All characters from SwiftData
+ - `@Query var traits` - All traits from SwiftData
+ - `@Environment(\.modelContext)` - SwiftData persistence context
+ - `@Environment(ViewModel.self)` - Shared app state
+ - `@State private var sidebarViewModel` - Sidebar-specific state management
+
+ ### Computed Properties
+
+ #### traitsFilter: [Filter]
+ Transforms traits into Filter objects:
+ - **Groups traits by name** using Dictionary grouping
+ - **Sorts alphabetically** by trait name
+ - **Creates Filter instances** with trait metadata
+
+ ## List Structure
+
+ ### Section 1: Smart Filters
+ - **Dynamic filters** from viewModel.smartFilters
+ - **NavigationLink navigation** with filter selection
+ - **System icons** for visual identification
+
+ ### Section 2: Traits
+ - **Trait-based filters** from traitsFilter
+ - **Character count badges** showing usage
+ - **Context menu** with delete/rename options
+ - **Accessibility support** with inflected character counts
+ - **Swipe-to-delete** functionality
+
+ ## Toolbar Actions
+
+ ### Debug Tools (DEBUG only)
+ - **Sample data insertion** - Adds test traits for development
+
+ ### Production Tools
+ - **Awards button** - Shows awards sheet with "rosette" icon
+ - **Add trait button** - Creates new traits with incremental naming
+
+ ## Modal Presentations
+
+ ### Rename Alert
+ - **Text field input** for new trait name
+ - **OK/Cancel buttons** with completion handling
+ - **Bound to sidebarViewModel** state
+
+ ### Awards Sheet
+ - **Presents AwardsView** in sheet format
+ - **Controlled by sidebarViewModel.showingAwards**
+
+ ## Extension Functions
+Swift Data related
+ 
+ ### deleteTraits(_ offsets: IndexSet)
+ Comprehensive trait deletion:
+ 1. **Removes trait references** from all characters
+ 2. **Deletes trait instances** from SwiftData context
+ 3. **Maintains data integrity** during deletion
+
+ ### countCharactersWithTrait(traitName: String) -> Int
+ Counts characters associated with specific trait name.
+
+ ### delete(_ filter: Filter)
+ Deletes individual trait via Filter object.
+
+ */
 struct SidebarView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(ViewModel.self) private var viewModel

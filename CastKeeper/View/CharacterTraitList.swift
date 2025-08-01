@@ -5,7 +5,47 @@
 //  Created by Renato Ferrara on 11/07/25.
 //
 import SwiftUI
+/**
+ # Overview
 
+ SwiftUI view that provides a dropdown menu interface for managing character traits, allowing users to add or remove traits from a character.
+
+ ### Menu Structure
+ - **Label:** Shows current traits or "No Traits" (localized)
+ - **Current traits section:** Checkmarked items with removal functionality
+ - **Divider** (if unselected traits exist)
+ - **"Add Traits" section:** Available traits to add
+
+ ### Computed Properties
+
+ #### `labelTraits: String`
+ Returns formatted string for menu label:
+ - Empty state: Localized "No Traits" message
+ - With traits: Alphabetically sorted, comma-separated trait names
+
+ ## Functionality
+
+ ### Trait Removal
+ - **Current traits** displayed with checkmark icons
+ - **Tap to remove** from character's trait list
+ - **Array initialization** handles nil traitsList
+
+ ### Trait Addition
+ - **Filtered display** shows only unselected traits
+ - **Tap to add** appends trait to character
+ - **Section grouping** under "Add Traits" header
+
+ ### Data Management
+ - **Nil safety:** Initializes `character.traitsList` if needed
+ - **Duplicate prevention:** Filters by trait name comparison
+ - **Direct manipulation** of character's trait array
+
+ ## UI Elements
+ - **Menu label:** Single line, leading alignment
+ - **Trait filtering:** Excludes already assigned traits
+ - **Conditional sections:** Only shows "Add Traits" if available
+ 
+ */
 struct CharacterTraitList: View {
     var character: Character
     var allTraits: [Traits]

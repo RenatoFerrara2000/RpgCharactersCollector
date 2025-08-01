@@ -6,6 +6,87 @@
 //
 
 import Foundation
+// swiftlint:disable all
+/**
+ # ApiClient Documentation
+
+ ## Overview
+
+ The `ApiClient` struct provides a Swift interface for communicating with the Anthropic Claude API. It handles message sending, conversation history management, and error handling for chat-based interactions with Claude AI models.
+
+ ## Core Components
+
+ ### ApiClient
+
+ The main client struct that manages API communication with the Anthropic Claude service.
+
+ #### Properties
+
+ - `apiKey: String` -  Anthropic API key for authentication
+
+ #### Methods
+
+ ##### sendMessage
+
+ Sends a message to Claude and returns the AI response as a `Message` object.
+
+ ```swift
+ func sendMessage(_ prompt: String, messages: [Message], instructions: String) async throws -> Message
+ ```
+
+ **Parameters:*
+ - `prompt: String` - The user's message/question to send to Claude
+ - `messages: [Message]` - Array of previous conversation messages for context
+ - `instructions: String` - System instructions that define Claude's behavior and role
+
+ **Returns:**
+ - `Message` - A message object containing Claude's response with a unique ID
+
+ **Throws:**
+ - `ChatError.emptyPrompt` - When the prompt is empty or contains only whitespace
+ - `HTTPError` - For various HTTP-related errors (authentication, rate limits, server errors)
+
+ ##### generateText
+
+ Lower-level method that handles the actual API communication and returns raw response data.
+
+ ```swift
+ func generateText(
+     from prompt: String,
+     instructions: String,
+     conversationHistory: [Message] = []
+ ) async throws -> (id: String, message: String)
+ ```
+
+ **Parameters:**
+ - `prompt: String` - The text prompt to send
+ - `instructions: String` - System instructions for the AI
+ - `conversationHistory: [Message]` - Optional conversation context (defaults to empty array)
+
+ **Returns:**
+ - `(id: String, message: String)` - Tuple containing the response ID and message text
+
+ ## Error Handling
+
+ ### HTTPError
+
+ A structured error type for handling HTTP-related failures.
+
+ ```swift
+ struct HTTPError: Error, LocalizedError {
+     let statusCode: Int
+ }
+ ```
+
+ **Error Descriptions:*
+ - **401:** "Authentication failed - check your API key"
+ - **400:** "Bad request - invalid parameters"
+ - **429:** "Rate limit exceeded"
+ - **500-599:** "Server error (statusCode)"
+ - **Other:** "HTTP error statusCode"
+
+ */
+// swiftlint:enable all
 
 struct ApiClient {
     var apiKey: String

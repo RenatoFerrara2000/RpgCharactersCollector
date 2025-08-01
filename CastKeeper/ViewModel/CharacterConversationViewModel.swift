@@ -6,6 +6,68 @@
 //
 import SwiftUI
 
+/**
+ # CharacterConversationViewModel Documentation
+
+ ## Overview
+
+ Observable view model that manages chat conversations with AI characters, handling message state, API communication, and dynamic character instruction generation.
+
+ ## CharacterConversationViewModel
+
+ Main-actor bound state management for character chat functionality.
+ 
+ ## Properties
+
+ ### State Properties
+ - `messages: [Message]` - Conversation history array
+ - `messageText: String` - Current input text
+ - `client: ApiClient` - API client with secret key injection
+
+ ### Computed Properties
+ - `canSendMessage: Bool` - Validates non-empty trimmed input
+
+ ## Core Methods
+
+ ### buildCharacterInstructions(character: Character) -> String
+ Generates dynamic system instructions for AI roleplay:
+
+ **Character Information:**
+ - Name (with fallback to "Unknown Character")
+ - Role (with fallback to "No specific role")
+ - Description (with fallback to "No description provided")
+ - Traits list (comma-separated if available)
+
+ **Built-in Guidelines:**
+ - Stay in character consistently
+ - Respond based on character attributes
+ - Maintain conversational engagement
+ - Child-safe content enforcement
+ - Character identity reinforcement
+ - Background-informed responses
+
+ ### sendChatMessage(char: Character)
+ Handles complete message sending workflow:
+
+ 1. **Input Processing:**
+    - Captures current `messageText`
+    - Clears input field immediately
+    - Adds user message to conversation with animation
+
+ 2. **API Communication:**
+    - Sends request with character instructions
+    - Excludes latest user message from context (uses `dropLast()`)
+    - Handles async/await pattern with Task
+
+ 3. **Response Handling:**
+    - Appends AI response with animation
+    - Error logging for debugging
+
+ ### Error Handling
+ - Basic error logging to console
+ - Graceful failure without UI disruption
+
+ */
 extension CharacterConversation {
     @Observable
     @MainActor // TODO: Check if is actually needed

@@ -6,7 +6,71 @@
 //
 import SwiftUI
 import SwiftData
+/**
 
+ # Overview
+
+ SwiftUI view that serves as the main character management interface, featuring a searchable list with filtering, selection, and CRUD operations.
+
+ Primary content view for character management with search and filtering capabilities.
+
+ ```swift
+ struct ContentView: View {
+     @Query var characterArray: [Character]
+     @Environment(\.modelContext) var modelContext
+     @Environment(ViewModel.self) private var viewModel
+     
+     var body: some View {
+         // View implementation
+     }
+ }
+ ```
+
+ ## Architecture
+
+ ### Data Management
+ - `@Query var characterArray` - SwiftData query for all characters
+ - `@Environment(\.modelContext)` - SwiftData persistence context
+ - `@Environment(ViewModel.self)` - Shared app state and filtering logic
+
+ ### Computed Properties
+ - `charactersFiltered` - Characters filtered through `viewModel.filterCharacters()`
+
+ ## Features
+
+ ### List Interface
+ - **Character rows** using ``CharacterRow`` component
+ - **Selection binding** to `viewModel.selectedCharacter`
+ - **Swipe-to-delete** functionality
+
+ ### Search & Filtering
+ - **Searchable interface** with text and token-based filtering
+ - **Token suggestions** for advanced filtering
+ - **Dynamic prompt** showing current filter state
+
+ ### Toolbar Actions
+ - **Add character button** with "square.and.pencil" icon
+ - **TraitsMenuView** component for trait management
+
+ ### Navigation
+ - **NavigationStack** container
+ - **Dynamic title** showing current filter: "Chr - [FilterName]"
+
+ ## Extension Functions
+
+ All Swift Data related
+ 
+ ### deleteCharacter(_ offsets: IndexSet)
+ Removes characters at specified indices from SwiftData context.
+
+ ### addCharacter()
+ Creates new character with:
+ - Default name: "New Character"
+ - Empty description and role
+ - Optional trait assignment based on current filter
+ - Automatic selection of new character
+
+ */
 struct ContentView: View {
     @Query var characterArray: [Character]
     @Environment(\.modelContext) var modelContext

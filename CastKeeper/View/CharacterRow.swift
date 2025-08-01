@@ -6,7 +6,30 @@
 //
 
 import SwiftUI
+/**
+ # Overview
 
+ SwiftUI view that displays a character in a row format with navigation support, showing character details in a structured layout.
+
+ ## Layout Structure
+
+ ### NavigationLink Container
+ - **Value-based navigation** using character as navigation value
+ - **Tappable row** for navigation to character details
+
+ ### Content Layout (HStack)
+ 1. **Icon section:**
+    - `figure.fencing` system image (large scale)
+
+ 2. **Character info (VStack, leading aligned):**
+    - **Name:** Headline font, single line limit
+    - **Traits list:** Displays all character traits, single line limit each
+
+ 3. **Date section (VStack, trailing aligned):**
+    - **Creation date:** Abbreviated format, subheadline font
+    - **Accessibility support** with formatted date label
+ 
+ */
 struct CharacterRow: View {
     @Environment(\.modelContext) var modelContext
     
