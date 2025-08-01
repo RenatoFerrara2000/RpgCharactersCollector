@@ -6,7 +6,10 @@
 //
 import SwiftUI
 import SwiftData
-
+/**
+ ## Overview
+ SwiftUI view that displays awards in a grid layout with interactive selection and detail presentation.
+ */
 struct AwardsView: View {
     @Environment(\.modelContext) var modelContext
     @State private var viewModel = AwardsViewModel()

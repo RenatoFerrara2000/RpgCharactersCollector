@@ -5,7 +5,36 @@
 //  Created by Renato Ferrara on 30/06/25.
 //
 import SwiftUI
+/**
+## Overview
 
+ SwiftUI view that provides a chat interface for conversations with a specific character, featuring message display and input controls.
+
+ ### Layout Structure
+ - **Section** with "Chat" header
+ - **VStack** containing message list and input area
+ - **List** for message display  
+ - **HStack** for text input and send button
+
+ ### Message Display
+ Each message shows:
+ - **Icon indication:**
+   - AI messages: `figure.fencing` (blue)
+   - User messages: `person` (green)
+ - **Message text** with leading padding
+
+ ### Input Controls
+ - **TextField** with rounded border style
+ - **Send button** (disabled based on `canSendMessage` state)
+ - **Submit actions** on both Return key and button tap
+ - **Input validation** through ViewModel
+
+ ## State Management
+ - `@State private var viewModel` - Manages messages and input state
+ - `character: Character` - Required character parameter for conversation context
+ - Message sending triggered via `viewModel.sendChatMessage(char: character)`
+
+ */
 struct CharacterConversation: View {
     @State private var viewModel = CharacterConversationViewModel()
     var character: Character

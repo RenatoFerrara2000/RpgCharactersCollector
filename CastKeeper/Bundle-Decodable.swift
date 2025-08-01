@@ -6,7 +6,10 @@
 //
 
 import Foundation
-
+/**
+ ## Extension Overview
+ Extension that adds JSON decoding functionality to Bundle, allowing easy loading and parsing of JSON files from the app bundle.
+ */
 extension Bundle {
     func decode<T: Decodable>(
         _ file: String,

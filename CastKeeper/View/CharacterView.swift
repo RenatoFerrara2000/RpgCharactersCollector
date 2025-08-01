@@ -6,7 +6,42 @@
 //
 import SwiftUI
 import SwiftData
+/**
+ # Overview
 
+ SwiftUI form-based view for displaying and editing character details, including basic information, traits, description, and chat functionality.
+
+ ## Architecture
+
+ ### Form Structure
+ Three main sections organized in a Form layout:
+
+ 1. **Character Info Section**
+ 2. **Description Section**
+ 3. **Conversation Section**
+
+ ### Data Management
+ - `@State var character` - Editable character instance
+ - `@Environment(\.modelContext)` - SwiftData context
+ - `@Query var allTraits` - All available traits from database
+
+ ## Form Sections
+
+ ### Section 1: Character Information
+ - **Name field:** Title font, bound to `character.name`
+ - **Role field:** Bound to `character.role`
+ - **Timestamp display:** Shows creation or modification date (long date, short time)
+ - **Trait management:** `CharacterTraitList` component for trait selection
+
+ ### Section 2: Description
+ - **Section header:** "Description" in title2 font (secondary color)
+ - **Description field:** Multiline text bound to `character.characterDescription`
+
+ ### Section 3: Conversation
+ - **Chat interface:** `CharacterConversation` component
+ - **Interactive messaging** with the character
+
+ */
 struct CharacterView: View {
     @State  var character: Character
     @Environment(\.modelContext) var modelContext

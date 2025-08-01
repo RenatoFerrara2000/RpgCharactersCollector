@@ -8,6 +8,19 @@
 import SwiftData
 import Foundation
 
+// swiftlint:disable all
+/**
+##** Overview**
+ This model is used to represent character traits
+ Has an inverse relationship with Character Trait list so that when a trait is deleted, so is deleted the reference on the character trait list.
+ ##** Parameters**
+ - `id`: unique identifier for the trait
+ - `name`: name of the trait
+ - `characterRelated`: character associated with the trait
+ 
+ */
+ // swiftlint:enable all
+
 @Model
 class Traits: Comparable {
     // Func for Comparable

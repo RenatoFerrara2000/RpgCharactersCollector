@@ -6,6 +6,18 @@
 //
 
 import Foundation
+// swiftlint:disable all
+/**
+Message
+Represents a chat message in the conversation.
+
+ ## Properties
+ - ` id` - Unique identifier (auto-generated UUID)
+ - `text` - Message content
+ - ` isAI` - True if from AI, false if from user
+ - ` timestamp` - When the message was created
+ */
+// swiftlint:enable all
 
 struct Message: Identifiable, Equatable {
     var id = UUID().uuidString
