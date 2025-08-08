@@ -11,11 +11,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		528DC9FD2E45EA6D0023E7FF /* CastKeeper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CastKeeper.xcodeproj; sourceTree = SOURCE_ROOT; };
 		52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		52F2C0852DC1F6BD001D5121 /* Exceptions for "CastKeeper" folder in "CastKeeper" target */ = {
+		520A828A2E45ED2000BB1961 /* Exceptions for "CastKeeper" folder in "CastKeeper" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -28,7 +29,7 @@
 		52F1B8252DBF7E76006FBDD2 /* CastKeeper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				52F2C0852DC1F6BD001D5121 /* Exceptions for "CastKeeper" folder in "CastKeeper" target */,
+				520A828A2E45ED2000BB1961 /* Exceptions for "CastKeeper" folder in "CastKeeper" target */,
 			);
 			path = CastKeeper;
 			sourceTree = "<group>";
@@ -47,6 +48,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		520A82752E45ECB200BB1961 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
 		52F1B81A2DBF7E76006FBDD2 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */,
+				528DC9FD2E45EA6D0023E7FF /* CastKeeper.xcodeproj */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +132,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 52F1B8242DBF7E76006FBDD2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 520A82752E45ECB200BB1961 /* Products */;
+					ProjectRef = 528DC9FD2E45EA6D0023E7FF /* CastKeeper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				52F1B8222DBF7E76006FBDD2 /* CastKeeper */,
