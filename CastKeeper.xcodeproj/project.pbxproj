@@ -7,12 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521198B22E5F4598002CD6B6 /* AssetsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521198B12E5F4598002CD6B6 /* AssetsTest.swift */; };
 		52C1DF892E2FD4AE00E8690E /* _ConfidentialKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		52CE4FF72E5F3DB10022583A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F1B81B2DBF7E76006FBDD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F1B8222DBF7E76006FBDD2;
+			remoteInfo = CastKeeper;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		528DC9FD2E45EA6D0023E7FF /* CastKeeper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CastKeeper.xcodeproj; sourceTree = SOURCE_ROOT; };
-		52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5211983F2E5F407E002CD6B6 /* CastKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastKeeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		521198B12E5F4598002CD6B6 /* AssetsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -37,6 +49,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		52CE4FF32E5F3DB10022583A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52F1B8202DBF7E76006FBDD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,31 +67,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		520A82752E45ECB200BB1961 /* Products */ = {
-			isa = PBXGroup;
-			name = Products;
-			sourceTree = "<group>";
-		};
 		52F1B81A2DBF7E76006FBDD2 = {
 			isa = PBXGroup;
 			children = (
+				521198B12E5F4598002CD6B6 /* AssetsTest.swift */,
 				52F1B8252DBF7E76006FBDD2 /* CastKeeper */,
-				52F1B8242DBF7E76006FBDD2 /* Products */,
+				5211983F2E5F407E002CD6B6 /* CastKeeper.app */,
+				521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		52F1B8242DBF7E76006FBDD2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */,
-				528DC9FD2E45EA6D0023E7FF /* CastKeeper.xcodeproj */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		52CE4FF52E5F3DB10022583A /* CastKeeperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52CE4FF92E5F3DB10022583A /* Build configuration list for PBXNativeTarget "CastKeeperTests" */;
+			buildPhases = (
+				52CE4FF22E5F3DB10022583A /* Sources */,
+				52CE4FF32E5F3DB10022583A /* Frameworks */,
+				52CE4FF42E5F3DB10022583A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52CE4FF82E5F3DB10022583A /* PBXTargetDependency */,
+			);
+			name = CastKeeperTests;
+			packageProductDependencies = (
+			);
+			productName = CastKeeperTests;
+			productReference = 521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		52F1B8222DBF7E76006FBDD2 /* CastKeeper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52F1B8322DBF7E78006FBDD2 /* Build configuration list for PBXNativeTarget "CastKeeper" */;
@@ -96,7 +123,7 @@
 				52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */,
 			);
 			productName = ExampleApp;
-			productReference = 52F1B8232DBF7E76006FBDD2 /* CastKeeper.app */;
+			productReference = 5211983F2E5F407E002CD6B6 /* CastKeeper.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -109,6 +136,11 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					52CE4FF52E5F3DB10022583A = {
+						CreatedOnToolsVersion = 16.4;
+						LastSwiftMigration = 1640;
+						TestTargetID = 52F1B8222DBF7E76006FBDD2;
+					};
 					52F1B8222DBF7E76006FBDD2 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -130,22 +162,24 @@
 				521444B82E327B0B005EA9E8 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 52F1B8242DBF7E76006FBDD2 /* Products */;
+			productRefGroup = 52F1B81A2DBF7E76006FBDD2;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 520A82752E45ECB200BB1961 /* Products */;
-					ProjectRef = 528DC9FD2E45EA6D0023E7FF /* CastKeeper.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				52F1B8222DBF7E76006FBDD2 /* CastKeeper */,
+				52CE4FF52E5F3DB10022583A /* CastKeeperTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		52CE4FF42E5F3DB10022583A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52F1B8212DBF7E76006FBDD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,6 +190,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		52CE4FF22E5F3DB10022583A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				521198B22E5F4598002CD6B6 /* AssetsTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52F1B81F2DBF7E76006FBDD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -178,9 +220,68 @@
 			isa = PBXTargetDependency;
 			productRef = 52C1DF8E2E2FD4CC00E8690E /* _ConfidentialKit */;
 		};
+		52CE4FF82E5F3DB10022583A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F1B8222DBF7E76006FBDD2 /* CastKeeper */;
+			targetProxy = 52CE4FF72E5F3DB10022583A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		52CE4FFA2E5F3DB10022583A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V7ZAPSKXZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RenFer.CastKeeperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CastKeeper.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CastKeeper";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		52CE4FFB2E5F3DB10022583A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V7ZAPSKXZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RenFer.CastKeeperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CastKeeper.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CastKeeper";
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
 		52F1B8302DBF7E78006FBDD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -322,7 +423,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -363,7 +464,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -382,6 +483,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		52CE4FF92E5F3DB10022583A /* Build configuration list for PBXNativeTarget "CastKeeperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52CE4FFA2E5F3DB10022583A /* Debug */,
+				52CE4FFB2E5F3DB10022583A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		52F1B81E2DBF7E76006FBDD2 /* Build configuration list for PBXProject "CastKeeper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
