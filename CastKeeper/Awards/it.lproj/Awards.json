@@ -51,7 +51,7 @@
         "name": "Una gilda di eroi",
         "description": "Aggiungi 500 personaggi.",
         "color": "MyLight Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 500,
         "image": "star.circle.fill"
     },

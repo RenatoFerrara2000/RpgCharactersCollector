@@ -69,7 +69,7 @@ extension AwardsView {
         var modelContext: ModelContext?
         
         func isAwardEarned(_ award: Award) -> Bool {
-            switch award.criterion {
+             switch award.criterion {
             case "character":
                 // returns true if they added a certain number of issues
                 let descriptor = FetchDescriptor<Character>()
@@ -81,6 +81,10 @@ extension AwardsView {
                 let descriptor = FetchDescriptor<Traits>()
                 let awardCount = (try? modelContext?.fetchCount(descriptor)) ?? 0
                 return awardCount >= award.value
+                
+            case "unlock":
+                 
+                 return false
                 
             default:
                 // an unknown award criterion; this should never be allowed

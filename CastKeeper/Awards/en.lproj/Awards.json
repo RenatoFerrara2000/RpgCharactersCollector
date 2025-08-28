@@ -51,7 +51,7 @@
         "name": "Star Performer",
         "description": "Add 500 Characters.",
         "color": "MyLight Blue",
-        "criterion": "Characters",
+        "criterion": "character",
         "value": 500,
         "image": "star.circle.fill"
     },
