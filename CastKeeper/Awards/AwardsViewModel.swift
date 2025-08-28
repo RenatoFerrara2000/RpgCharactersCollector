@@ -84,9 +84,8 @@ extension AwardsView {
                 
             default:
                 // an unknown award criterion; this should never be allowed
-                // fatalError("Unknown award criterion: \(award.criterion)")
-                return false
-            }
+                fatalError("Unknown award criterion: \(award.criterion)")
+             }
         }
         
         func awardTitle(for award: Award) -> String {

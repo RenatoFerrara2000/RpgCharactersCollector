@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		521198B22E5F4598002CD6B6 /* AssetsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521198B12E5F4598002CD6B6 /* AssetsTest.swift */; };
+		526CD6042E6062BE00FF4434 /* CharacterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526CD6012E6062BE00FF4434 /* CharacterTest.swift */; };
 		52C1DF892E2FD4AE00E8690E /* _ConfidentialKit in Frameworks */ = {isa = PBXBuildFile; productRef = 52C1DF882E2FD4AE00E8690E /* _ConfidentialKit */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		5211983F2E5F407E002CD6B6 /* CastKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastKeeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		521198B12E5F4598002CD6B6 /* AssetsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsTest.swift; sourceTree = "<group>"; };
+		526CD6012E6062BE00FF4434 /* CharacterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				521198B12E5F4598002CD6B6 /* AssetsTest.swift */,
+				526CD6012E6062BE00FF4434 /* CharacterTest.swift */,
 				52F1B8252DBF7E76006FBDD2 /* CastKeeper */,
 				5211983F2E5F407E002CD6B6 /* CastKeeper.app */,
 				521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */,
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				526CD6042E6062BE00FF4434 /* CharacterTest.swift in Sources */,
 				521198B22E5F4598002CD6B6 /* AssetsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
