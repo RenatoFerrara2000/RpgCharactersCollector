@@ -32,7 +32,7 @@ struct AwardsTest {
         }
     
     @Test func testClosedAwards() {
-        
+        // GIVEN
         let values = [1, 10, 20, 50, 100, 250, 500, 1000]
         let viewModel = AwardsView.AwardsViewModel()
          viewModel.modelContext = context
@@ -48,10 +48,12 @@ struct AwardsTest {
                 }
             }
             
+            // WHEN
             let matches = awards.filter { award in
                 viewModel.isAwardEarned(award)
             }
-
+            
+            //THEN
             #expect(matches.count == count + 1,  "Completing \(value) characters should unlock \(count + 1) awards.")
             
             // Clear existing characters

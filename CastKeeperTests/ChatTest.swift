@@ -22,13 +22,17 @@ struct ChatTest {
     
     @Test("Test with real API")
     func testRealAPIIntegration() async throws {
+        // GIVEN
         let chatService = ApiClient(apiKey: "\(Secrets.$apiKeyCl)")
+        
+        // WHEN
         let result = try await chatService.sendMessage(
             "Say 'Hello, World!' and nothing else.",
             messages: [],
             instructions: "You are a helpful assistant. Follow instructions exactly."
         )
         
+        // THEN
         #expect(result.isAI == true)
         #expect(result.text.contains("Hello, World!"))
         #expect(!result.id.isEmpty)

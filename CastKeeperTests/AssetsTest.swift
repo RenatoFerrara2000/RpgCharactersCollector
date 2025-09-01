@@ -11,7 +11,6 @@ import UIKit
 
 
 struct AssetsTest {
-    
     @Test func testAwardsLoadCorrectly() {
          #expect(Award.allAwards.isEmpty == false, "Failed to load awards from JSON.")
     }

@@ -24,24 +24,27 @@ struct CharacterTest {
      }
     
     @Test("Creating 2 characters and 4 traits") func characterCreationsAndTraits() {
+        // GIVEN
         let hero = Character(name: "HeroTest", characterDescription: "A normal Hero.", role: "Hero of the Test" )
         let villain = Character(name: "VillainTest", characterDescription: "A normal Villain.", role: "Villain of the Test" )
         
         hero.traitsList = [Traits(name: "Good Guy"), Traits(name:"Heroic")]
         
         villain.traitsList = [Traits(name: "Bad Guy"), Traits(name:"Evil")]
-        
+        // WHEN
         context.insert(hero)
         context.insert(villain)
         do {
             try context.save()
             
+            // THEN
             let fetchDescriptor = FetchDescriptor<Character>()
             let savedCharacters = try context.fetch(fetchDescriptor)
             #expect(savedCharacters.count == 2)
             
            let traitsFetchDescriptor = FetchDescriptor<Traits>()
             let savedTraits = try context.fetch(traitsFetchDescriptor)
+            
             #expect(savedTraits.count == 4)
         } catch {
              fatalError("Error")
@@ -51,7 +54,7 @@ struct CharacterTest {
      }
     
     @Test("Effect of deleting a trait ") func testDeletingATraitsFromCharacter() throws {
-        
+        // GIVEN
         let hero = Character(name: "HeroTest", characterDescription: "A normal Hero.", role: "Hero of the Test" )
         let villain = Character(name: "VillainTest", characterDescription: "A normal Villain.", role: "Villain of the Test" )
         
@@ -59,11 +62,12 @@ struct CharacterTest {
         
         villain.traitsList = [Traits(name: "Bad Guy"), Traits(name:"Evil")]
         
-        
+        // WHEN
         context.insert(hero)
         context.insert(villain)
         
         do {
+            // THEN
             context.delete(hero.traitsList![0])
             try context.save()
 
@@ -83,7 +87,7 @@ struct CharacterTest {
     }
     
     @Test("Effect of deleting a Character ") func testDeletingCharacter() throws {
-        
+        // GIVEN
         let hero = Character(name: "HeroTest", characterDescription: "A normal Hero.", role: "Hero of the Test" )
         let villain = Character(name: "VillainTest", characterDescription: "A normal Villain.", role: "Villain of the Test" )
         
@@ -91,7 +95,7 @@ struct CharacterTest {
         
         villain.traitsList = [Traits(name: "Bad Guy"), Traits(name:"Evil")]
         
-        
+        // WHEN
         context.insert(hero)
         context.insert(villain)
         
@@ -99,6 +103,7 @@ struct CharacterTest {
              context.delete(hero)
             try context.save()
 
+            // THEN
             let fetchDescriptor = FetchDescriptor<Character>()
             let savedCharacters = try context.fetch(fetchDescriptor)
             #expect(savedCharacters.count == 1)
