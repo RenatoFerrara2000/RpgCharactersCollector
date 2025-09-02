@@ -18,6 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		52A104512E66D6C9004B192A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F1B81B2DBF7E76006FBDD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F1B8222DBF7E76006FBDD2;
+			remoteInfo = CastKeeper;
+		};
 		52CE4FF72E5F3DB10022583A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 52F1B81B2DBF7E76006FBDD2 /* Project object */;
@@ -37,6 +44,7 @@
 		5227EFA72E65E01C0085D960 /* DecodableString.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecodableString.json; sourceTree = "<group>"; };
 		526CD6012E6062BE00FF4434 /* CharacterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTest.swift; sourceTree = "<group>"; };
 		526CD61E2E608F9F00FF4434 /* AwardsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsTest.swift; sourceTree = "<group>"; };
+		52A1044B2E66D6C9004B192A /* CastKeeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastKeeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -50,6 +58,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		52A1044C2E66D6C9004B192A /* CastKeeperUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CastKeeperUITests;
+			sourceTree = "<group>";
+		};
 		52F1B8252DBF7E76006FBDD2 /* CastKeeper */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -61,6 +74,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		52A104482E66D6C9004B192A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52CE4FF32E5F3DB10022583A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -108,12 +128,37 @@
 				52F1B8252DBF7E76006FBDD2 /* CastKeeper */,
 				5211983F2E5F407E002CD6B6 /* CastKeeper.app */,
 				521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */,
+				52A1044B2E66D6C9004B192A /* CastKeeperUITests.xctest */,
+				52A1044C2E66D6C9004B192A /* CastKeeperUITests */,
 			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		52A1044A2E66D6C9004B192A /* CastKeeperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52A104552E66D6C9004B192A /* Build configuration list for PBXNativeTarget "CastKeeperUITests" */;
+			buildPhases = (
+				52A104472E66D6C9004B192A /* Sources */,
+				52A104482E66D6C9004B192A /* Frameworks */,
+				52A104492E66D6C9004B192A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52A104522E66D6C9004B192A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				52A1044C2E66D6C9004B192A /* CastKeeperUITests */,
+			);
+			name = CastKeeperUITests;
+			packageProductDependencies = (
+			);
+			productName = CastKeeperUITests;
+			productReference = 52A1044B2E66D6C9004B192A /* CastKeeperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		52CE4FF52E5F3DB10022583A /* CastKeeperTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52CE4FF92E5F3DB10022583A /* Build configuration list for PBXNativeTarget "CastKeeperTests" */;
@@ -167,9 +212,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					52A1044A2E66D6C9004B192A = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 52F1B8222DBF7E76006FBDD2;
+					};
 					52CE4FF52E5F3DB10022583A = {
 						CreatedOnToolsVersion = 16.4;
 						LastSwiftMigration = 1640;
@@ -202,11 +251,19 @@
 			targets = (
 				52F1B8222DBF7E76006FBDD2 /* CastKeeper */,
 				52CE4FF52E5F3DB10022583A /* CastKeeperTests */,
+				52A1044A2E66D6C9004B192A /* CastKeeperUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		52A104492E66D6C9004B192A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52CE4FF42E5F3DB10022583A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,6 +283,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		52A104472E66D6C9004B192A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		52CE4FF22E5F3DB10022583A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +316,11 @@
 			isa = PBXTargetDependency;
 			productRef = 521445832E327BB7005EA9E8 /* SwiftLintBuildToolPlugin */;
 		};
+		52A104522E66D6C9004B192A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F1B8222DBF7E76006FBDD2 /* CastKeeper */;
+			targetProxy = 52A104512E66D6C9004B192A /* PBXContainerItemProxy */;
+		};
 		52C1DF8B2E2FD4C400E8690E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 52C1DF8A2E2FD4C400E8690E /* Confidential */;
@@ -268,6 +337,50 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		52A104532E66D6C9004B192A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V7ZAPSKXZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RenFer.CastKeeperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = CastKeeper;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		52A104542E66D6C9004B192A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V7ZAPSKXZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RenFer.CastKeeperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = CastKeeper;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
 		52CE4FFA2E5F3DB10022583A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -523,6 +636,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		52A104552E66D6C9004B192A /* Build configuration list for PBXNativeTarget "CastKeeperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52A104532E66D6C9004B192A /* Debug */,
+				52A104542E66D6C9004B192A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		52CE4FF92E5F3DB10022583A /* Build configuration list for PBXNativeTarget "CastKeeperTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
