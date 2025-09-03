@@ -55,11 +55,21 @@
 			);
 			target = 52F1B8222DBF7E76006FBDD2 /* CastKeeper */;
 		};
+		52D920BA2E68580800853D72 /* Exceptions for "CastKeeperUITests" folder in "CastKeeperUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CastKeeperUITests.xctestplan,
+			);
+			target = 52A1044A2E66D6C9004B192A /* CastKeeperUITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		52A1044C2E66D6C9004B192A /* CastKeeperUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				52D920BA2E68580800853D72 /* Exceptions for "CastKeeperUITests" folder in "CastKeeperUITests" target */,
+			);
 			path = CastKeeperUITests;
 			sourceTree = "<group>";
 		};
@@ -102,6 +112,7 @@
 		5227EF9E2E65DF810085D960 /* CastKeeperTests */ = {
 			isa = PBXGroup;
 			children = (
+				52A1044C2E66D6C9004B192A /* CastKeeperUITests */,
 				5227EFA22E65DFEC0085D960 /* TestFixtures */,
 				521198B12E5F4598002CD6B6 /* AssetsTest.swift */,
 				526CD61E2E608F9F00FF4434 /* AwardsTest.swift */,
@@ -129,7 +140,6 @@
 				5211983F2E5F407E002CD6B6 /* CastKeeper.app */,
 				521198A62E5F425D002CD6B6 /* CastKeeperTests.xctest */,
 				52A1044B2E66D6C9004B192A /* CastKeeperUITests.xctest */,
-				52A1044C2E66D6C9004B192A /* CastKeeperUITests */,
 			);
 			sourceTree = "<group>";
 		};

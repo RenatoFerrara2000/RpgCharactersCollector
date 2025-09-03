@@ -97,8 +97,10 @@ struct ContentView: View {
                 } label: {
                     Label("New Character", systemImage: "square.and.pencil")
                   
-                    TraitsMenuView()
-                }
+                 }
+                .accessibilityIdentifier("Add-Character-Button")
+                TraitsMenuView()
+
             }
             .navigationTitle(Text("Chr - \(viewModel.selectedFilter?.name ?? "")"))
         }

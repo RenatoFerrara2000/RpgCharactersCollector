@@ -50,7 +50,7 @@ struct CastKeeper: App {
             } detail: {
                 DetailView()
             }
-            .modelContainer(for: [Character.self, Traits.self] )
+            .modelContainer(modelContainer )
             .environment(viewModel)
         }
     }
@@ -61,6 +61,8 @@ struct CastKeeper: App {
     #if DEBUG
             // Create an in-memory model container for testing
             configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+            UIView.setAnimationsEnabled(false)
+
     #else
             // Release: Use default configuration
             configuration = ModelConfiguration(isStoredInMemoryOnly: false)

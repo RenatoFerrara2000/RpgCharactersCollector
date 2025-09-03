@@ -156,7 +156,7 @@ struct SidebarView: View {
                 sidebarViewModel.showingAwards.toggle()
             } label: {
                 Label("Show awards", systemImage: "rosette")
-            }
+            }.accessibilityIdentifier("Show Awards Button")
             
             Button {
                 // Find the highest "New Trait" number

@@ -78,7 +78,7 @@ struct TraitsMenuView: View {
         } label: {
             Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
             .symbolVariant(viewModel.filterEnabled ? .fill : .none)
-        }
+        }.accessibilityIdentifier("Filter-Button")
     }
 }
 

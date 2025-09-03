@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "88D33671-7636-48B7-853E-592CB4E974F4",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : "-AppleLanguages (en-US)"
+      },
+      {
+        "argument" : "-AppleLocale en_US"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:CastKeeper.xcodeproj",
+      "identifier" : "52F1B8222DBF7E76006FBDD2",
+      "name" : "CastKeeper"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:CastKeeper.xcodeproj",
+        "identifier" : "52A1044A2E66D6C9004B192A",
+        "name" : "CastKeeperUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

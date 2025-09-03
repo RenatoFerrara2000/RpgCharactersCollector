@@ -51,7 +51,7 @@ struct NoCharacterView: View {
                 .font(.title)
             
             Button("New Character") {
-                let char = Character(name: "New Character", characterDescription: "", role: "")
+                let char = Character(    name: String(localized: "New Character"), characterDescription: "", role: "")
                 modelContext.insert(char)
                 
                 // Set the newly created character as selected

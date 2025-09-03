@@ -49,7 +49,7 @@ struct AwardsView: View {
             // Empty action closure
         } message: {
             Text(viewModel.selectedAward.description)
-        }
+        }.accessibilityIdentifier("Locked-Alert")
         .onAppear {
             viewModel.modelContext = modelContext
         }

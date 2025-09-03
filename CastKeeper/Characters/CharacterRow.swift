@@ -58,7 +58,8 @@ struct CharacterRow: View {
                         .font(.subheadline)
                 }
             }
-        }
+
+        }.accessibilityIdentifier(character.name)
     }
 }
 
