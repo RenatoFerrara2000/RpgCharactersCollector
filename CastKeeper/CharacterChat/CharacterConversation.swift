@@ -62,16 +62,13 @@ struct CharacterConversation: View {
                 HStack {
                     TextField("Write Something", text: $viewModel.messageText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onSubmit {
-                            viewModel.sendChatMessage(char: character)
-                        }
                     
                     Button {
                         viewModel.sendChatMessage(char: character)
                     } label: {
                         Text("Send")
                     }
-                    .disabled(viewModel.canSendMessage)
+                    .disabled(!viewModel.canSendMessage)
                 }
                 .padding()
             }

@@ -79,6 +79,7 @@ extension CharacterConversation {
         
         var canSendMessage: Bool {
             !messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            
         }
         
         func buildCharacterInstructions(character: Character) -> String {
